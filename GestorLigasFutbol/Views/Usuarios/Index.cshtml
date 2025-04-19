@@ -1,0 +1,48 @@
+﻿@{
+	ViewData["Title"] = "Inicio Usuarios";
+}
+<div class="container-fluid">
+	<h2>Registros de Usuarios</h2>
+	<a type="button" asp-controller="Usuarios" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Id Usuario</th>
+			<th>Nombre</th>
+			<th>ApellidoP</th>
+			<th>ApellidoM</th>
+			<th>Correo</th>
+			<th>Contraseña</th>
+			<th>TipoUsuario</th>
+		</tr>
+	</thead>
+	<tbody>
+		@*programando recorrido de la lista *@
+		@{
+			if (ViewBag.Usuarios != null)
+			{
+				foreach (var item in ViewBag.Usuarios)
+				{
+					//generando las filas por cada registro
+					<tr>
+						<td>@item.IdUsuario</td>
+						<td>@item.Nombre</td>
+						<td>@item.ApellidoP</td>
+						<td>@item.ApellidoM</td>
+						<td>@item.Correo</td>
+						<td>@item.Contrasena</td>
+						<td>@item.IdTipoUsuario</td>
+						<td>
+							<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.IdUsuario">Editar</a>
+							<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.IdUsuario">Ver</a>
+							<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.IdUsuario">Eliminar</a>
+						</td>
+
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+
