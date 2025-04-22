@@ -4,14 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Runtime.Serialization;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace GestorLigasFutbol.Controllers
 {
     public class TipoUsuariosController : Controller
     {
 
-        //Get TipoUsuarios
         public IActionResult Index()
         {
             //Establecer la conexion 
@@ -36,6 +35,7 @@ namespace GestorLigasFutbol.Controllers
                             //Agregando valores para cada parametro del modelo
                             Id = Convert.ToInt32(dt.Rows[i][0]),
                             Nombre = dt.Rows[i][1].ToString(),
+                            
 
                         });
                     }
@@ -44,7 +44,6 @@ namespace GestorLigasFutbol.Controllers
                 }
                 return View();
             }
-            return View();
         }
 
         public IConfiguration Configuration { get; }
@@ -53,5 +52,6 @@ namespace GestorLigasFutbol.Controllers
         {
             Configuration = configuration;
         }
+
     }
 }
