@@ -12,7 +12,7 @@ namespace GestorLigasFutbol.Controllers
     {
 
         //Get TipoUsuarios
-        public IActionResult TipoUsuarios()
+        public IActionResult Index()
         {
             //Establecer la conexion 
             using (SqlConnection con = new(Configuration["ConnectionStrings:BdConexion"]))
