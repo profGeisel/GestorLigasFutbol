@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GestorLigasFutbol.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Runtime.Serialization;

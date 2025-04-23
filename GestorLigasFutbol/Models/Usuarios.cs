@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace GestorLigasFutbol.Models
 {
-    public class JugadorModel
+    public class Usuarios
     {
         public int Id { get; set; }
 

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable< GestorLigasFutbol.Models.Usuarios>
+@{
 	ViewData["Title"] = "Inicio Usuarios";
 }
 <div class="container-fluid">
@@ -8,42 +9,37 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Id Usuario</th>
-			<th>Nombre</th>
-			<th>ApellidoP</th>
-			<th>ApellidoM</th>
-			<th>Correo</th>
-			<th>Contraseña</th>
-			<th>TipoUsuario</th>
+			<th>@Html.DisplayNameFor(Model=>Model.Id)</th>
+			<th>@Html.DisplayNameFor(Model => Model.Nombre)</th>
+			<th>@Html.DisplayNameFor(Model => Model.ApellidoP)</th>
+			<th>@Html.DisplayNameFor(Model => Model.ApellidoM)</th>
+			<th>@Html.DisplayNameFor(Model => Model.CorreoE)</th>
+			<th>@Html.DisplayNameFor(Model => Model.Contrasena)</th>
+			<th>@Html.DisplayNameFor(Model => Model.IdTipoUsuario)</th>
 			<th>Opciones</th>
 		</tr>
 	</thead>
 	<tbody>
-		@*programando recorrido de la lista *@
-		@{
-			if (ViewBag.Usuarios != null)
-			{
-				foreach (var item in ViewBag.Usuarios)
-				{
-					//generando las filas por cada registro
-					<tr>
-						<td>@item.Id</td>
-						<td>@item.Nombre</td>
-						<td>@item.ApellidoP</td>
-						<td>@item.ApellidoM</td>
-						<td>@item.CorreoE</td>
-						<td>@item.Contrasena</td>
-						<td>@item.IdTipoUsuario</td>
-						<td>
-							<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
-							<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
-							<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
-						</td>
+		
+		@foreach (var item in Model)
+		{
+		//generando las filas por cada registro
+			<tr>
+				<td>@Html.DisplayFor(modelsItem=>item.Id)</td>
+				<td>@Html.DisplayFor(modelsItem=>item.Nombre)</td>
+				<td>@Html.DisplayFor(modelsItem=>item.ApellidoP)</td>
+				<td>@Html.DisplayFor(modelsItem=>item.ApellidoM)</td>
+				<td>@Html.DisplayFor(modelsItem=>item.CorreoE)</td>
+				<td>@Html.DisplayFor(modelsItem=>item.Contrasena)</td>
+				<td>@Html.DisplayFor(modelsItem=>item.IdTipoUsuario)</td>
+				<td>
+					<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+					<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
+					<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
+				</td>
 
-					</tr>
-				}
-			}
-		}
-	</tbody>
+			</tr>
+		}	
+	</tbody
 </table>
 
