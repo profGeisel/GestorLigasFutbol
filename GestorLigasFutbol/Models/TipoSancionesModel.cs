@@ -18,10 +18,10 @@ namespace GestorLigasFutbol.Models
         public int Tiempo { get; set; }
 
         [Required(ErrorMessage = "El Valor o costo es requerido")]
-        public int valor {  get; set; }
+        public int Valor {  get; set; }
 
         [Required(ErrorMessage = "El estado es requerido")]
-        public Boolean estado {  get; set; }
+        public bool Estado {  get; set; }
 
         [Required(ErrorMessage = "La liga es requerida")]
         public int IdLiga {  get; set; }
