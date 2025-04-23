@@ -9,7 +9,7 @@ namespace GestorLigasFutbol.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "La condicion de la sancion es requerida")]
-        public bool Activa { get; set; }
+        public Byte Activa { get; set; }
 
         [Required(ErrorMessage = "El jugador es requerido")]
         public int IdJugador { get; set; }

@@ -30,7 +30,7 @@ namespace GestorLigasFutbol.Controllers
                         {
                             //Agregando valores para cada parametro del modelo
                             Id = Convert.ToInt32(dt.Rows[i][0]),
-                            Activa = Convert.ToBoolean(dt.Rows[i][1]),
+                            Activa = Convert.ToByte(dt.Rows[i][1]),
                             IdJugador = Convert.ToInt32(dt.Rows[i][2]),
                             IdEquipo = Convert.ToInt32(dt.Rows[i][3]),
                             IdCampeonato = Convert.ToInt32(dt.Rows[i][4]),
