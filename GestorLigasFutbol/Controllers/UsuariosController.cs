@@ -24,11 +24,11 @@ namespace GestorLigasFutbol.Controllers
                     DataTable dt = new();//creacion de tabla
                     da.Fill(dt); //llenado de tabla
                     da.Dispose();  //eliminacion de recursos
-                    List<UsuarioModel> lista = new(); //creando una lista
+                    List<JugadorModel> lista = new(); //creando una lista
 
                     for (int i = 0; i < dt.Rows.Count; i++) //recorrido dentro del data table para agregar a una lista
                     {
-                        lista.Add(new UsuarioModel() // creacion de objeto de tipo UsuarioModel
+                        lista.Add(new JugadorModel() // creacion de objeto de tipo UsuarioModel
                         {
                             //Agregando valores para cada parametro del modelo
                             Id = Convert.ToInt32(dt.Rows[i][0]),
@@ -62,7 +62,7 @@ namespace GestorLigasFutbol.Controllers
 
         //metodo para registrar
         [HttpPost]
-        public IActionResult Registrar(UsuarioModel usuario)
+        public IActionResult Registrar(JugadorModel usuario)
         {
             if (ModelState.IsValid)
             {

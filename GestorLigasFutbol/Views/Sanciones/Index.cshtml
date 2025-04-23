@@ -1,30 +1,38 @@
 ﻿@{
-	ViewData["Title"] = "Tipo Usuarios";
+	ViewData["Title"] = "Sanciones";
 }
 
 <div class="container-fluid">
-	<h2>Registros de Tipos de Usuarios</h2>
-	<a type="button" asp-controller="" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+	<h2>Registros de Sanciones Deportivas</h2>
+	<a type="button" asp-controller="Sanciones" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
 </div>
 <table class="table">
 	<thead>
 		<tr>
-			<th>Id TipoUsuario</th>
-			<th>Nombre</th>
+			<th>Id Sanciones</th>
+			<th>Activa</th>
+			<th>IdJugador</th>
+			<th>IdEquipo</th>
+			<th>IdCampeonato</th>
+			<th>IdTipoS</th>
+
 		</tr>
 	</thead>
 	<tbody>
 		@*programando recorrido de la lista *@
 		@{
-			if (ViewBag.TipoUsuarios != null)
+			if (ViewBag.Sanciones != null)
 			{
-				foreach (var item in ViewBag.TipoUsuarios)
+				foreach (var item in ViewBag.Sanciones)
 				{
 					//generando las filas por cada registro
 					<tr>
 						<td>@item.Id</td>
-						<td>@item.Nombre</td>
-						
+						<td>@item.Activa</td>
+						<td>@item.IdJugador</td>
+						<td>@item.IdEquipo</td>
+						<td>@item.IdCampeonato</td>
+						<td>@item.IdTipoS</td>
 						<td>
 							<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
 							<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
@@ -37,5 +45,3 @@
 		}
 	</tbody>
 </table>
-
-

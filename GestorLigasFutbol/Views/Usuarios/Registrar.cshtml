@@ -2,9 +2,10 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-@model UsuarioModel //referenccia al modelo usuario
+@model JugadorModel //referenccia al modelo usuario
 @{
 	ViewData["Title"] = "Registro de usuario"; //titulo de la pagina
+	List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
 }
 
 <div class="container">

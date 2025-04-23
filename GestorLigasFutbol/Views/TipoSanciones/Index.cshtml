@@ -1,39 +1,40 @@
 ﻿@{
-	ViewData["Title"] = "Inicio Usuarios";
+	ViewData["Title"] = "Tipos de Sanciones";
 }
+
 <div class="container-fluid">
-	<h2>Registros de Usuarios</h2>
-	<a type="button" asp-controller="Usuarios" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+	<h2>Registros de Tipo de Sanciones</h2>
+	<a type="button" asp-controller="TipoSanciones" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
 </div>
 <table class="table">
 	<thead>
 		<tr>
-			<th>Id Usuario</th>
+			<th>Id </th>
 			<th>Nombre</th>
-			<th>ApellidoP</th>
-			<th>ApellidoM</th>
-			<th>Correo</th>
-			<th>Contraseña</th>
-			<th>TipoUsuario</th>
-			<th>Opciones</th>
+			<th>Descripcion</th>
+			<th>Tiempo</th>
+			<th>Valor</th>
+			<th>Estado</th>
+			<th>Liga</th>
+
 		</tr>
 	</thead>
 	<tbody>
 		@*programando recorrido de la lista *@
 		@{
-			if (ViewBag.Usuarios != null)
+			if (ViewBag.TipoSanciones != null)
 			{
-				foreach (var item in ViewBag.Usuarios)
+				foreach (var item in ViewBag.TipoSanciones)
 				{
 					//generando las filas por cada registro
 					<tr>
 						<td>@item.Id</td>
 						<td>@item.Nombre</td>
-						<td>@item.ApellidoP</td>
-						<td>@item.ApellidoM</td>
-						<td>@item.CorreoE</td>
-						<td>@item.Contrasena</td>
-						<td>@item.IdTipoUsuario</td>
+						<td>@item.Descripcion</td>
+						<td>@item.Tiempo</td>
+						<td>@item.Valor</td>
+						<td>@item.Estado</td>
+						<td>@item.Liga</td>
 						<td>
 							<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
 							<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
@@ -46,4 +47,3 @@
 		}
 	</tbody>
 </table>
-
