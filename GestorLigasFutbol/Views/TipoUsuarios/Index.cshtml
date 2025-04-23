@@ -1,6 +1,4 @@
-﻿@model IEnumerable<GestorLigasFutbol.Models.TipoUsuarios>
-
-@{
+﻿@{
 	ViewData["Title"] = "Tipo Usuarios";
 }
 
@@ -11,25 +9,31 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>@Html.DisplayNameFor(Model => Model.Id)</th>
-			<th>@Html.DisplayNameFor(Model => Model.Nombre)</th>
-			<th>Opciones</th>
+			<th>Id TipoUsuario</th>
+			<th>Nombre</th>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var item in Model)
-		{
-			//generando las filas por cada registro
-			<tr>
-				<td>@Html.DisplayFor(modelsItem => item.Id)</td>
-				<td>@Html.DisplayFor(modelsItem => item.Nombre)</td>
-				<td>
-					<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
-					<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
-					<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
-				</td>
+		@*programando recorrido de la lista *@
+		@{
+			if (ViewBag.TipoUsuarios != null)
+			{
+				foreach (var item in ViewBag.TipoUsuarios)
+				{
+					//generando las filas por cada registro
+					<tr>
+						<td>@item.Id</td>
+						<td>@item.Nombre</td>
+						
+						<td>
+							<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+							<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
+							<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
+						</td>
 
-			</tr>
+					</tr>
+				}
+			}
 		}
 	</tbody>
 </table>

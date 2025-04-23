@@ -12,7 +12,5 @@ namespace GestorLigasFutbol.Data
         }
         //Mostrando datos en tabla de Usuarios
         public DbSet<Usuarios> Usuarios { get; set; }
-        //Mostrando datos en tabla de TipoUsuarios
-        public DbSet<TipoUsuarios> TipoUsuarios { get; set; }
     }
 }
