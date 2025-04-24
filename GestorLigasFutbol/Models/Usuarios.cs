@@ -25,6 +25,6 @@ namespace GestorLigasFutbol.Models
         public string Contrasena { get; set; }
 
         [Required(ErrorMessage = "El tipo de Usuario es requerida")]
-        public int IdTipoUsuario { get; set; }
+        public int IdTipoUsuarios { get; set; }
     }
 }

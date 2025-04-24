@@ -1,21 +1,26 @@
-﻿@model IEnumerable< GestorLigasFutbol.Models.Usuarios>
+﻿@model List<Usuarios>
 @{
 	ViewData["Title"] = "Inicio Usuarios";
 }
 <div class="container-fluid">
-	<h2>Registros de Usuarios</h2>
-	<a type="button" asp-controller="Usuarios" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+	<h2>Usuarios</h2>
+	<a type="button" asp-controller="Usuarios" asp-action="Insertar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
 </div>
-<table class="table">
+@if (Model.Count==0)
+{
+	<p>No hay usuarios registrados</p>
+}
+else
+{
+	<table class="table">
 	<thead>
 		<tr>
-			<th>@Html.DisplayNameFor(Model=>Model.Id)</th>
-			<th>@Html.DisplayNameFor(Model => Model.Nombre)</th>
-			<th>@Html.DisplayNameFor(Model => Model.ApellidoP)</th>
-			<th>@Html.DisplayNameFor(Model => Model.ApellidoM)</th>
-			<th>@Html.DisplayNameFor(Model => Model.CorreoE)</th>
-			<th>@Html.DisplayNameFor(Model => Model.Contrasena)</th>
-			<th>@Html.DisplayNameFor(Model => Model.IdTipoUsuario)</th>
+			<th>Nombre</th>
+			<th>ApellidoP</th>
+			<th>ApellidoM</th>
+			<th>CorreoE</th>
+			<th>Contrasena</th>
+			<th>IdTipoUsuario</th>
 			<th>Opciones</th>
 		</tr>
 	</thead>
@@ -25,21 +30,21 @@
 		{
 		//generando las filas por cada registro
 			<tr>
-				<td>@Html.DisplayFor(modelsItem=>item.Id)</td>
 				<td>@Html.DisplayFor(modelsItem=>item.Nombre)</td>
 				<td>@Html.DisplayFor(modelsItem=>item.ApellidoP)</td>
 				<td>@Html.DisplayFor(modelsItem=>item.ApellidoM)</td>
 				<td>@Html.DisplayFor(modelsItem=>item.CorreoE)</td>
 				<td>@Html.DisplayFor(modelsItem=>item.Contrasena)</td>
-				<td>@Html.DisplayFor(modelsItem=>item.IdTipoUsuario)</td>
+				<td>@Html.DisplayFor(modelsItem=>item.IdTipoUsuarios)</td>
 				<td>
-					<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+					<a asp-action="Actualizar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
 					<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
 					<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
 				</td>
 
 			</tr>
 		}	
-	</tbody
+	</tbody>
 </table>
 
+}
