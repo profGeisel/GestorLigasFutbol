@@ -9,8 +9,8 @@ namespace GestorLigasFutbol.Controllers
 {
     public class UsuariosController : Controller
     {
-        private readonly AppDbContext _context;
-        public UsuariosController(AppDbContext context)
+        private readonly DbContextUsuarios _context;
+        public UsuariosController(DbContextUsuarios context)
         {
             _context = context;
         }

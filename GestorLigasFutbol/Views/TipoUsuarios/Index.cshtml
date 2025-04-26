@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GestorLigasFutbol.Models.TipoUsuarios>
+﻿@model List<TipoUsuarios>
 
 @{
 	ViewData["Title"] = "Tipo Usuarios";
@@ -6,13 +6,13 @@
 
 <div class="container-fluid">
 	<h2>Registros de Tipos de Usuarios</h2>
-	<a type="button" asp-controller="" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+	<a type="button" asp-controller="TipoUsuarios" asp-action="Insertar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
 </div>
 <table class="table">
 	<thead>
 		<tr>
-			<th>@Html.DisplayNameFor(Model => Model.Id)</th>
-			<th>@Html.DisplayNameFor(Model => Model.Nombre)</th>
+			
+			<th>Nombre</th>
 			<th>Opciones</th>
 		</tr>
 	</thead>
@@ -21,10 +21,9 @@
 		{
 			//generando las filas por cada registro
 			<tr>
-				<td>@Html.DisplayFor(modelsItem => item.Id)</td>
 				<td>@Html.DisplayFor(modelsItem => item.Nombre)</td>
 				<td>
-					<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+					<a asp-action="Actualizar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
 					<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
 					<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
 				</td>
