@@ -1,4 +1,5 @@
 using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,17 @@ builder.Services.AddDbContext<DbContextTipoUsuarios>(option =>
 builder.Services.AddDbContext<DbContextSanciones>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
+//para login 
+builder.Services.AddSingleton(new ContextLogin(builder.Configuration.GetConnectionString("BdConexion")));
+//sesion de autenticacion
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+{
+    //propiedades
+    option.LoginPath = "/UsuariosLogin/Login"; //ruta donde esta el metodo de login dentro del controller
+
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,6 +40,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//Agregar autenticacion 
+app.UseAuthentication();
 
 app.UseAuthorization();
 

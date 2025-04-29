@@ -2,9 +2,12 @@
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestorLigasFutbol.Controllers
 {
+    //restringir la autorizacion 
+    [Authorize]
     public class EquiposController : Controller
     {
         public IActionResult Index()

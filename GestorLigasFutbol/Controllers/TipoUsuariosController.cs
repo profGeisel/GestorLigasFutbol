@@ -5,10 +5,13 @@ using System.Data;
 using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace GestorLigasFutbol.Controllers
 {
+    //restringir la autorizacion 
+    [Authorize]
     public class TipoUsuariosController : Controller
     {
         private readonly DbContextTipoUsuarios _context;

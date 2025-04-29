@@ -3,9 +3,12 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestorLigasFutbol.Controllers
 {
+    //restringir la autorizacion 
+    [Authorize]
     public class SancionesController : Controller
     {
         private readonly DbContextSanciones _context;
