@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GestorLigasFutbol.Models
 {
-    public class SancionesModel
+    public class Sanciones
     {
         public int Id { get; set; }
 

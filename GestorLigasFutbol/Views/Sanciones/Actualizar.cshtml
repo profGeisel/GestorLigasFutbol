@@ -1,0 +1,60 @@
+﻿
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+@model Sanciones //referenccia al modelo usuario
+@{
+	ViewData["Title"] = "Registro de Sanciones"; //titulo de la pagina
+}
+
+<div class="container">
+	<div id="registroUs" style="margin-top:50px; margin-bottom:50px;" class=" mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-info">
+			<h2 class="text-center">Actualizar Usuario</h2>
+			<div style="padding-top:30px" class="panel-body">
+				<form asp-action="Actualizar" method="post" class="form-floating">
+					<div class="form-group">
+						<label asp-for="Id"></label>
+						<input class="form-control" asp-for="Id" readonly/>
+					</div>
+					<div class="form-group">
+						<label asp-for="Activa"></label>
+						<input class="form-control" asp-for=Activa />
+						<span asp-validation-for="Activa" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="IdJugador"></label>
+						<input class="form-control" asp-for=IdJugador />
+						<span asp-validation-for="IdJugador" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="IdEquipo"></label>
+						<input class="form-control" asp-for=IdEquipo />
+						<span asp-validation-for="IdEquipo" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="IdCampeonato"></label>
+						<input class="form-control" asp-for=IdCampeonato />
+						<span asp-validation-for="IdCampeonato" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="IdTipoS"></label>
+						<input class="form-control" asp-for=IdTipoS />
+						<span asp-validation-for="IdTipoS" class="text-danger"></span>
+					</div>
+					<br />
+					<div class="text-center col-sm-12 controls panel-body">
+						<button type="submit" value="Actualizar" class="btn btn-sm btn-warning">Actualizar</button>
+						<a asp-action="Index" class="btn btn-sm btn-secondary">Regresar a la lista</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

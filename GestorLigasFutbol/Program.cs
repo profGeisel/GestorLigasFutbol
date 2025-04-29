@@ -11,6 +11,9 @@ builder.Services.AddDbContext<DbContextUsuarios>(option =>
 builder.Services.AddDbContext<DbContextTipoUsuarios>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
+builder.Services.AddDbContext<DbContextSanciones>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
