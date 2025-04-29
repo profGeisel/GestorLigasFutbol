@@ -75,5 +75,18 @@ namespace GestorLigasFutbol.Controllers
 
             return View();
         }
+
+        //Metodo de Logeo 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(Usuarios usuarios )
+        {
+             return View();
+        }
+
     }
 }
