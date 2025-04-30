@@ -1,9 +1,18 @@
 using GestorLigasFutbol.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
+//para login 
+builder.Services.AddSingleton(new ContextLogin(builder.Configuration.GetConnectionString("BdConexion")));
 
+//sesion de autenticacion
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+{
+    //propiedades
+    option.LoginPath = "/UsuariosLogin/Login"; //ruta donde esta el metodo de login dentro del controller
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DbContextUsuarios>(option =>
@@ -15,16 +24,7 @@ builder.Services.AddDbContext<DbContextTipoUsuarios>(option =>
 builder.Services.AddDbContext<DbContextSanciones>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
-//para login 
-builder.Services.AddSingleton(new ContextLogin(builder.Configuration.GetConnectionString("BdConexion")));
-//sesion de autenticacion
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
-{
-    //propiedades
-    option.LoginPath = "/UsuariosLogin/Login"; //ruta donde esta el metodo de login dentro del controller
 
-
-});
 
 var app = builder.Build();
 

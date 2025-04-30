@@ -20,7 +20,7 @@ namespace GestorLigasFutbol.Data
             builder.Entity<Sanciones>().ToTable("Sanciones");
             builder.Entity<Sanciones>().HasKey(u => u.Id);
             builder.Entity<Sanciones>().Property(u => u.Id).HasColumnName("id");
-            builder.Entity<Sanciones>().Property(u => u.Activa).HasColumnName("activa");
+            builder.Entity<Sanciones>().Property(u => u.EsActiva).HasColumnName("esActiva");
             builder.Entity<Sanciones>().Property(u => u.IdJugador).HasColumnName("idJugador");
             builder.Entity<Sanciones>().Property(u => u.IdEquipo).HasColumnName("idEquipo");
             builder.Entity<Sanciones>().Property(u => u.IdCampeonato).HasColumnName("idCampeonato");
@@ -44,15 +44,15 @@ namespace GestorLigasFutbol.Data
         }
 
         //metodo para insertar datos a la tabla
-        public void CrearSanciones(bool activa, int idJugador, int idEquipo, int idCampeonato, int idTipoS)
+        public void CrearSanciones(bool esActiva, int idJugador, int idEquipo, int idCampeonato, int idTipoS)
         {
-            Database.ExecuteSqlRaw("exec spInsertarSanciones {0}, {1}, {2}, {3}, {4}", activa, idJugador, idEquipo, idCampeonato, idTipoS);
+            Database.ExecuteSqlRaw("exec spInsertarSanciones {0}, {1}, {2}, {3}, {4}", esActiva, idJugador, idEquipo, idCampeonato, idTipoS);
         }
 
         //metodo para actualizar datos a la tabla
-        public void ActualizarSanciones(int id, bool activa, int idJugador, int idEquipo, int idCampeonato, int idTipoS)
+        public void ActualizarSanciones(int id, bool esActiva, int idJugador, int idEquipo, int idCampeonato, int idTipoS)
         {
-            Database.ExecuteSqlRaw("exec spActualizarSanciones {0} ,{1}, {2}, {3}, {4}, {5}", id, activa, idJugador, idEquipo, idCampeonato, idTipoS);
+            Database.ExecuteSqlRaw("exec spActualizarSanciones {0} ,{1}, {2}, {3}, {4}, {5}", id, esActiva, idJugador, idEquipo, idCampeonato, idTipoS);
         }
 
 

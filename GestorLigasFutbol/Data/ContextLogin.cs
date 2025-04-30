@@ -7,9 +7,9 @@ namespace GestorLigasFutbol.Data
         public string Conexion {  get; }
 
         //constructor
-        public ContextLogin(string conexion)
+        public ContextLogin(string valor)
         {
-            Conexion = conexion;
+            Conexion = valor;
 
         }
 

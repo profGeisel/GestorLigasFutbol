@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace GestorLigasFutbol.Controllers
 {
     //restringir la autorizacion 
-    [Authorize]
+    // [Authorize]
     public class SancionesController : Controller
     {
         private readonly DbContextSanciones _context;
@@ -33,7 +33,7 @@ namespace GestorLigasFutbol.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.CrearSanciones(Sanciones.Activa, Sanciones.IdJugador, Sanciones.IdEquipo, Sanciones.IdCampeonato, Sanciones.IdTipoS);
+                _context.CrearSanciones(Sanciones.EsActiva, Sanciones.IdJugador, Sanciones.IdEquipo, Sanciones.IdCampeonato, Sanciones.IdTipoS);
                 return RedirectToAction("Index");
             }
             return View();
@@ -52,7 +52,7 @@ namespace GestorLigasFutbol.Controllers
         {
             if (ModelState.IsValid && Sanciones.Id > 0)
             {
-                _context.ActualizarSanciones(Sanciones.Id, Sanciones.Activa, Sanciones.IdJugador, Sanciones.IdEquipo, Sanciones.IdCampeonato, Sanciones.IdTipoS);
+                _context.ActualizarSanciones(Sanciones.Id, Sanciones.EsActiva, Sanciones.IdJugador, Sanciones.IdEquipo, Sanciones.IdCampeonato, Sanciones.IdTipoS);
                 return RedirectToAction("Index");
             }
 

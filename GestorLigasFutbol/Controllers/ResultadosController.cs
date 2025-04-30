@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace GestorLigasFutbol.Controllers
 {
     //restringir la autorizacion 
-    [Authorize]
+    // [Authorize]
     public class ResultadosController : Controller
     {
         public IActionResult Index()

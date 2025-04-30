@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace GestorLigasFutbol.Controllers
 {
     //restringir la autorizacion 
-    [Authorize]
+    // [Authorize]
     public class TipoUsuariosController : Controller
     {
         private readonly DbContextTipoUsuarios _context;
