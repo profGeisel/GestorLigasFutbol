@@ -1,10 +1,12 @@
-﻿@{
+﻿@model List<TipoSanciones>
+
+@{
 	ViewData["Title"] = "Tipos de Sanciones";
 }
 
 <div class="container-fluid">
 	<h2>Registros de Tipo de Sanciones</h2>
-	<a type="button" asp-controller="TipoSanciones" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+	<a type="button" asp-controller="TipoSanciones" asp-action="Insertar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
 </div>
 <table class="table">
 	<thead>
@@ -21,22 +23,19 @@
 	</thead>
 	<tbody>
 		@*programando recorrido de la lista *@
-		@{
-			if (ViewBag.TipoSanciones != null)
-			{
-				foreach (var item in ViewBag.TipoSanciones)
+		@{foreach (var item in Model)
 				{
 					//generando las filas por cada registro
 					<tr>
-						<td>@item.Id</td>
-						<td>@item.Nombre</td>
-						<td>@item.Descripcion</td>
-						<td>@item.Tiempo</td>
-						<td>@item.Valor</td>
-						<td>@item.Estado</td>
-						<td>@item.Liga</td>
+						<td>@Html.DisplayFor(modelsItem => item.Id)</td>
+						<td>@Html.DisplayFor(modelsItem => item.Nombre)</td>
+						<td>@Html.DisplayFor(modelsItem => item.Descripcion)</td>
+						<td>@Html.DisplayFor(modelsItem => item.Tiempo)</td>
+						<td>@Html.DisplayFor(modelsItem => item.Valor)</td>
+						<td>@Html.DisplayFor(modelsItem => item.Estado)</td>
+						<td>@Html.DisplayFor(modelsItem => item.IdLiga)</td>
 						<td>
-							<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+							<a asp-action="Actualizar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
 							<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
 							<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
 						</td>

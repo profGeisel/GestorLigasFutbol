@@ -44,12 +44,13 @@ namespace GestorLigasFutbol.Data
         {
             Database.ExecuteSqlRaw("exec spInsertarTipoUsuarios {0} ", nombre);
         }
-
         //metodo para actualizar datos a la tabla
         public void ActualizarTipoUsuario(int id, string nombre)
         {
             Database.ExecuteSqlRaw("exec spActualizarTipoUsuarios {0} ,{1}", id, nombre);
         }
+
+
 
 
         //metodo para Eliminar datos a la tabla

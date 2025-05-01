@@ -3,6 +3,7 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
+using GestorLigasFutbol.Data;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -10,87 +11,75 @@ namespace GestorLigasFutbol.Controllers
     // [Authorize]
     public class TipoSancionesController : Controller
     {
+        private readonly DbContextP _context;
+        public TipoSancionesController(DbContextP context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
-            //Establecer la conexion 
-            using (SqlConnection con = new(Configuration["ConnectionStrings:BdConexion"]))
-            {
-                // Instruccion para ejecutar procedimiento almacenado con la conexion a bd
-                using (SqlCommand cmd = new("spGetTipoSanciones", con))
-                {
-                    //se define el tipo de commandType
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    con.Open();
-                    SqlDataAdapter da = new(cmd); //ejecutar comando
-                    DataTable dt = new();//creacion de tabla
-                    da.Fill(dt); //llenado de tabla
-                    da.Dispose();  //eliminacion de recursos
-                    List<TipoSancionesModel> lista = new(); //creando una lista
+            var tipoSanciones = _context.ObtenerTipoSanciones().ToList();
 
-                    for (int i = 0; i < dt.Rows.Count; i++) //recorrido dentro del data table para agregar a una lista
-                    {
-                        lista.Add(new TipoSancionesModel() // creacion de objeto de tipo UsuarioModel
-                        {
-                            //Agregando valores para cada parametro del modelo
-                            Id = Convert.ToInt32(dt.Rows[i][0]),
-                            Nombre = dt.Rows[i][1].ToString(),
-                            Descripcion = dt.Rows[i][2].ToString(),
-                            Tiempo = Convert.ToInt32(dt.Rows[i][3].ToString()),
-                            Valor = Convert.ToInt32(dt.Rows[i][4].ToString()),
-                            Estado=Convert.ToBoolean(dt.Rows[i][5].ToString()),
-                            IdLiga = Convert.ToInt32(dt.Rows[i][6]),
-                        });
-                    }
-                    ViewBag.TipoSanciones = lista; //contendra lo que este en la lista
-                    con.Close(); // cerrar conexion
-                }
-                return View();
-            }
+            return View(tipoSanciones);
         }
-
-        public IConfiguration Configuration { get; }
-        //constructor
-        public TipoSancionesController(IConfiguration configuration)
+        public IActionResult Insertar()
         {
-            Configuration = configuration;
+            return View();
         }
 
-        //metodo para registrar Tipo Sanciones
+        //metodo para crear un usuario
         [HttpPost]
-        public IActionResult Registrar(TipoSancionesModel tipoSancion)
+        public IActionResult Insertar(TipoSanciones TipoSanciones)
         {
             if (ModelState.IsValid)
             {
-                //Establecer la conexion que inicializa la configuracion con la cadena ConnectionStrings
-                using (SqlConnection con = new(Configuration["ConnectionStrings:BdConexion"]))
-                {
-                    //Instruccion para ejecutar procedimiento almacenado con la conexion a bd
-                    using (SqlCommand cmd = new("spInsertarTipoSanciones", con))
-                    {
-
-                        //se especifica el tipo 
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        //Se especifica el parametro nombre, su tipo y el valor en el modelo 
-                        cmd.Parameters.Add("@Nombre", System.Data.SqlDbType.VarChar).Value = tipoSancion.Nombre;
-                        cmd.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar).Value = tipoSancion.Descripcion;
-                        cmd.Parameters.Add("@Tiempo", System.Data.SqlDbType.VarChar).Value = tipoSancion.Tiempo;
-                        cmd.Parameters.Add("@Valor", System.Data.SqlDbType.VarChar).Value = tipoSancion.Valor;
-                        cmd.Parameters.Add("@IdLiga", System.Data.SqlDbType.VarChar).Value = tipoSancion.IdLiga;
-                        con.Open();// abri la conexion
-                        cmd.ExecuteNonQuery(); // ejecutar los comandos
-                        con.Close(); // cerrar la conexion 
-
-                    }
-                }
+                _context.CrearTipoSancion(TipoSanciones.Nombre, TipoSanciones.Descripcion,TipoSanciones.Tiempo,TipoSanciones.Valor,TipoSanciones.Estado, TipoSanciones.IdLiga);
+                return RedirectToAction("Index");
             }
-            else
+            return View();
+
+        }
+
+        //metodo para la actualizacion 
+        //GEt de actualizar
+        public IActionResult Actualizar(int id)
+        {
+            var tipoSanciones = _context.ObtenerTipoSancionId(id);
+            return View(tipoSanciones);
+        }
+        [HttpPost]
+        public IActionResult Actualizar(TipoSanciones TipoSanciones)
+        {
+            if (ModelState.IsValid && TipoSanciones.Id > 0)
             {
-                ViewBag.Mensaje = "Usuario Registrado con exito";
-                return Redirect("Index");
+                _context.ActualizarTipoSancion(TipoSanciones.Id, TipoSanciones.Nombre, TipoSanciones.Descripcion,TipoSanciones.Tiempo, TipoSanciones.Valor, TipoSanciones.Estado, TipoSanciones.IdLiga);
+                return RedirectToAction("Index");
             }
-            return Redirect("Index");
+
+            return View();
+        }
+
+
+        //metodo para Eliminar 
+        //GEt de Eliminar
+        public IActionResult Eliminar(int id)
+        {
+            var TipoSanciones = _context.ObtenerTipoSancionId(id);
+            return View(TipoSanciones);
+        }
+        [HttpPost]
+        public IActionResult Eliminar(TipoSanciones TipoSanciones)
+        {
+            if (TipoSanciones.Id > 0)
+            {
+                _context.EliminarTipoSancion(TipoSanciones.Id);
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
+
 }
 
 

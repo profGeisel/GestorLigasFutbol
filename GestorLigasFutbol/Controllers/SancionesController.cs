@@ -27,7 +27,7 @@ namespace GestorLigasFutbol.Controllers
             return View();
         }
 
-        //metodo para crear un usuario
+        //metodo para crear una sancion
         [HttpPost]
         public IActionResult Insertar(Sanciones Sanciones)
         {

@@ -24,6 +24,9 @@ builder.Services.AddDbContext<DbContextTipoUsuarios>(option =>
 builder.Services.AddDbContext<DbContextSanciones>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
+builder.Services.AddDbContext<DbContextP>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
 
 
 var app = builder.Build();

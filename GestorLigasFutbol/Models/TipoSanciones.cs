@@ -2,7 +2,7 @@
 
 namespace GestorLigasFutbol.Models
 {
-    public class TipoSancionesModel
+    public class TipoSanciones
     {
         public int Id { get; set; }
 
@@ -21,7 +21,7 @@ namespace GestorLigasFutbol.Models
         public int Valor {  get; set; }
 
         [Required(ErrorMessage = "El estado es requerido")]
-        public bool Estado {  get; set; }
+        public string Estado {  get; set; }
 
         [Required(ErrorMessage = "La liga es requerida")]
         public int IdLiga {  get; set; }

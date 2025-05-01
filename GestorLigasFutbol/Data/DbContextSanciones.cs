@@ -39,18 +39,18 @@ namespace GestorLigasFutbol.Data
         //metodo para retornar un Sanciones segun un id
         public Sanciones ObtenerSancionesId(int id)
         {
-            var Sancion = Sanciones.FromSqlInterpolated($"exec spGetSanciones {id}").AsEnumerable().FirstOrDefault();
+            var Sancion = Sanciones.FromSqlInterpolated($"exec spGetSancion {id}").AsEnumerable().FirstOrDefault();
             return Sancion;
         }
 
         //metodo para insertar datos a la tabla
-        public void CrearSanciones(bool esActiva, int idJugador, int idEquipo, int idCampeonato, int idTipoS)
+        public void CrearSanciones(string esActiva, int idJugador, int idEquipo, int idCampeonato, int idTipoS)
         {
             Database.ExecuteSqlRaw("exec spInsertarSanciones {0}, {1}, {2}, {3}, {4}", esActiva, idJugador, idEquipo, idCampeonato, idTipoS);
         }
 
         //metodo para actualizar datos a la tabla
-        public void ActualizarSanciones(int id, bool esActiva, int idJugador, int idEquipo, int idCampeonato, int idTipoS)
+        public void ActualizarSanciones(int id, string esActiva, int idJugador, int idEquipo, int idCampeonato, int idTipoS)
         {
             Database.ExecuteSqlRaw("exec spActualizarSanciones {0} ,{1}, {2}, {3}, {4}, {5}", id, esActiva, idJugador, idEquipo, idCampeonato, idTipoS);
         }
