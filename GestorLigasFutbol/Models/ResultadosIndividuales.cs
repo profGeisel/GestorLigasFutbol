@@ -6,7 +6,7 @@ namespace GestorLigasFutbol.Models
     {
         public int Id {  get; set; }
         [Required (ErrorMessage ="El jugador es requerido")]
-        public string IdJugador { get; set; }
+        public int IdJugador { get; set; }
         [Required(ErrorMessage = "El numero de goles es requerido")]
         public int cantidadGoles {  get; set; }
         [Required(ErrorMessage = "El numero de asistencias es requerido")]

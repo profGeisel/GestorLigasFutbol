@@ -58,7 +58,7 @@ namespace GestorLigasFutbol.Data
         //metodo para Eliminar datos a la tabla
         public void EliminarResultadoIndividual(int id)
         {
-            Database.ExecuteSqlRaw("exec spEliminarUsuarios {0}", id);
+            Database.ExecuteSqlRaw("exec spEliminarResultadosIndividuales {0}", id);
         }
 
     }
