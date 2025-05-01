@@ -2,7 +2,7 @@
 
 namespace GestorLigasFutbol.Models
 {
-    public class LigasModel
+    public class Ligas
     {
         public int Id { get; set; }
 

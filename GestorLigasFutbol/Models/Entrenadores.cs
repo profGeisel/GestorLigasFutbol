@@ -2,7 +2,7 @@
 
 namespace GestorLigasFutbol.Models
 {
-    public class JugadoresModel
+    public class Entrenadores
     {
         public int Id { get; set; }
 
@@ -20,14 +20,13 @@ namespace GestorLigasFutbol.Models
 
         public byte Foto { get; set; }
 
-        [Required(ErrorMessage = "El numero de camiseta es requerido")]
-        public int NumeroCamisa { get; set; }
+        [Required(ErrorMessage = "La fecha de nacimiento es requerido")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:DD-MM-YYYY}")]
+        public DateTime FechaNacimiento { get; set; }
 
-        [Required(ErrorMessage = "El año de nacimiento es requerido")]
-        public int A_Nacimiento { get; set; }
-
-        [Required(ErrorMessage = "La edad es requerida")]
-        public int Edad { get; set; }
+        [Required(ErrorMessage = "El correo es requerido")]
+        public String CorreoE { get; set; }
 
         [Required(ErrorMessage = "La cedula es requerida")]
         [StringLength(10, ErrorMessage = "Maximo 10 caracteres")]

@@ -2,7 +2,7 @@
 
 namespace GestorLigasFutbol.Models
 {
-    public class CampeonatosModel
+    public class Campeonatos
     {
         public int Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace GestorLigasFutbol.Models
         public int NumeroEquiposP{  get; set; }
 
         [Required(ErrorMessage = "El estado del campeonato es requerido")]
-        public Boolean activo { get; set; }
+        public string Activo { get; set; }
 
         [Required(ErrorMessage = "Debe seleccionarse una liga")]
         public int IdLiga { get; set; }

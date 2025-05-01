@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GestorLigasFutbol.Data
 {
-    public class DbContextP:DbContext
+    public class DbContextTipoSanciones:DbContext
     {
-        public DbContextP(DbContextOptions<DbContextP> options) : base(options)
+        public DbContextTipoSanciones(DbContextOptions<DbContextTipoSanciones> options) : base(options)
         {
 
         }
@@ -63,4 +63,5 @@ namespace GestorLigasFutbol.Data
         }
 
     }
+
 }

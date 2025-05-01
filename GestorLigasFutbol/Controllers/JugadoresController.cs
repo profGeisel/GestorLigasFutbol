@@ -25,11 +25,11 @@ namespace GestorLigasFutbol.Controllers
                     DataTable dt = new();//creacion de tabla
                     da.Fill(dt); //llenado de tabla
                     da.Dispose();  //eliminacion de recursos
-                    List<JugadoresModel> lista = new(); //creando una lista
+                    List<Jugadores> lista = new(); //creando una lista
 
                     for (int i = 0; i < dt.Rows.Count; i++) //recorrido dentro del data table para agregar a una lista
                     {
-                        lista.Add(new JugadoresModel() // creacion de objeto de tipo UsuarioModel
+                        lista.Add(new Jugadores() // creacion de objeto de tipo UsuarioModel
                         {
                             //Agregando valores para cada parametro del modelo
                             Id = Convert.ToInt32(dt.Rows[i][0]),

@@ -3,7 +3,7 @@ using System.Data;
 
 namespace GestorLigasFutbol.Models
 {
-    public class EventosModel
+    public class Eventos
     {
         public int Id {  get; set; }
 

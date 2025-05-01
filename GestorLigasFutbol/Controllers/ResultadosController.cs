@@ -3,6 +3,7 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
+using GestorLigasFutbol.Data;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -10,52 +11,72 @@ namespace GestorLigasFutbol.Controllers
     // [Authorize]
     public class ResultadosController : Controller
     {
-        public IActionResult Index()
-        {
-            //Establecer la conexion 
-            using (SqlConnection con = new(Configuration["ConnectionStrings:BdConexion"]))
+            private readonly DbContextResultados _context;
+            public ResultadosController(DbContextResultados context)
             {
-                // Instruccion para ejecutar procedimiento almacenado con la conexion a bd
-                using (SqlCommand cmd = new("spGetResultados", con))
-                {
-                    //se define el tipo de commandType
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    con.Open();
-                    SqlDataAdapter da = new(cmd); //ejecutar comando
-                    DataTable dt = new();//creacion de tabla
-                    da.Fill(dt); //llenado de tabla
-                    da.Dispose();  //eliminacion de recursos
-                    List<ResultadosModel> lista = new(); //creando una lista
+                _context = context;
+            }
+            public IActionResult Index()
+            {
+                var resultados = _context.ObtenerResultados().ToList();
 
-                    for (int i = 0; i < dt.Rows.Count; i++) //recorrido dentro del data table para agregar a una lista
-                    {
-                        lista.Add(new ResultadosModel() // creacion de objeto de tipo UsuarioModel
-                        {
-                            //Agregando valores para cada parametro del modelo
-                            Id = Convert.ToInt32(dt.Rows[i][0]),
-                            IdEquipo = Convert.ToInt32(dt.Rows[i][1]),
-                            IdEvento = Convert.ToInt32(dt.Rows[i][2]),
-                            Triunfos = Convert.ToInt32(dt.Rows[i][3]),
-                            Empates = Convert.ToInt32(dt.Rows[i][4]),
-                            Derrotas = Convert.ToInt32(dt.Rows[i][5]),
-                            Juegos = Convert.ToInt32(dt.Rows[i][6]),
-                            GolesFavor = Convert.ToInt32(dt.Rows[i][7]),
-                            GolesContra = Convert.ToInt32(dt.Rows[i][8]),
-                            DiferenciaGoles = Convert.ToInt32(dt.Rows[i][9]),
-                        });
-                    }
-                    ViewBag.Resultados = lista; //contendra lo que este en la lista
-                    con.Close(); // cerrar conexion
+                return View(resultados);
+            }
+            public IActionResult Insertar()
+            {
+                return View();
+            }
+
+            //metodo para crear un usuario
+            [HttpPost]
+            public IActionResult Insertar(Resultados Resultados)
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.CrearResultado(Resultados.IdEquipo, Resultados.IdEvento, Resultados.Triunfos, Resultados.Empates, Resultados.Derrotas, Resultados.Juegos, Resultados.GolesFavor, Resultados.GolesContra, Resultados.DiferenciaGoles);
+                    return RedirectToAction("Index");
                 }
+                return View();
+
+            }
+
+            //metodo para la actualizacion 
+            //GEt de actualizar
+            public IActionResult Actualizar(int id)
+            {
+                var resultados = _context.ObtenerResultadoId(id);
+                return View(resultados);
+            }
+            [HttpPost]
+            public IActionResult Actualizar(Resultados Resultados)
+            {
+                if (ModelState.IsValid && Resultados.Id > 0)
+                {
+                    _context.ActualizarResultado(Resultados.Id, Resultados.IdEquipo, Resultados.IdEvento, Resultados.Triunfos, Resultados.Empates, Resultados.Derrotas, Resultados.Juegos, Resultados.GolesFavor, Resultados.GolesContra, Resultados.DiferenciaGoles);
+                    return RedirectToAction("Index");
+                }
+
+                return View();
+            }
+
+
+            //metodo para Eliminar 
+            //GEt de Eliminar
+            public IActionResult Eliminar(int id)
+            {
+                var resultado = _context.ObtenerResultadoId(id);
+                return View(resultado);
+            }
+            [HttpPost]
+            public IActionResult Eliminar(Resultados Resultados)
+            {
+                if (Resultados.Id > 0)
+                {
+                    _context.EliminarResultado(Resultados.Id);
+                    return RedirectToAction("Index");
+                }
+
                 return View();
             }
         }
-
-        public IConfiguration Configuration { get; }
-        //constructor
-        public ResultadosController(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
     }
-}

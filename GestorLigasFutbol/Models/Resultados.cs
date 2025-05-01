@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GestorLigasFutbol.Models
 {
-    public class ResultadosModel
+    public class Resultados
     {
         public int Id { get; set; }
 

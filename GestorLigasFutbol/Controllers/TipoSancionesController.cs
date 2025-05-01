@@ -11,8 +11,8 @@ namespace GestorLigasFutbol.Controllers
     // [Authorize]
     public class TipoSancionesController : Controller
     {
-        private readonly DbContextP _context;
-        public TipoSancionesController(DbContextP context)
+        private readonly DbContextTipoSanciones _context;
+        public TipoSancionesController(DbContextTipoSanciones context)
         {
             _context = context;
         }

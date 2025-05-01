@@ -24,10 +24,29 @@ builder.Services.AddDbContext<DbContextTipoUsuarios>(option =>
 builder.Services.AddDbContext<DbContextSanciones>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
-builder.Services.AddDbContext<DbContextP>(option =>
+builder.Services.AddDbContext<DbContextTipoSanciones>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
+builder.Services.AddDbContext<DbContextResultados>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
+builder.Services.AddDbContext<DbContextLigas>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextJugadores>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextEventos>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextEquipos>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextEntrenadores>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextCampeonatos>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
 var app = builder.Build();
 

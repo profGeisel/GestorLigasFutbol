@@ -3,7 +3,7 @@ using Microsoft.VisualBasic;
 
 namespace GestorLigasFutbol.Models
 {
-    public class EquiposModel
+    public class Equipos
     {
         public int Id { get; set; }
 
@@ -19,10 +19,6 @@ namespace GestorLigasFutbol.Models
         [Required(ErrorMessage = "El Lugar es requerido")]
         [StringLength(20, ErrorMessage = "Maximo 20 caracteres")]
         public string Lugar { get; set; }
-
-        [Required(ErrorMessage = "El nombre del capitan es requerido")]
-        [StringLength(25, ErrorMessage = "Maximo 25 caracteres")]
-        public string Capitan {  get; set; }
 
         public DateTime FechaFundacion { get; set; }
 
