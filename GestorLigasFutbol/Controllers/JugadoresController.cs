@@ -38,7 +38,7 @@ namespace GestorLigasFutbol.Controllers
                             ApellidoM=dt.Rows[i][3].ToString(),
                             Foto =Convert.ToByte( dt.Rows[i][4]),
                             NumeroCamisa= Convert.ToInt32(dt.Rows [i][5]),
-                            
+                            A_Nacimiento= Convert.ToInt32(dt.Rows[i][6]),
                             Edad = Convert.ToInt32(dt.Rows[i][7]),
                             Cedula= dt.Rows[i][8].ToString(),
                             IdEquipo = Convert.ToInt32(dt.Rows[i][9]),

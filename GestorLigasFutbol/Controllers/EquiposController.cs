@@ -3,7 +3,6 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
-using GestorLigasFutbol.Data;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -11,73 +10,52 @@ namespace GestorLigasFutbol.Controllers
     // [Authorize]
     public class EquiposController : Controller
     {
-        private readonly DbContextEquipos _context;
-        public EquiposController(DbContextEquipos context)
-        {
-            _context = context;
-        }
         public IActionResult Index()
         {
-            var equipos = _context.ObtenerEquipos().ToList();
-
-            return View(equipos);
-        }
-        public IActionResult Insertar()
-        {
-            return View();
-        }
-
-        //metodo para crear un equipos
-        [HttpPost]
-        public IActionResult Insertar(Equipos Equipos)
-        {
-            if (ModelState.IsValid)
+            //Establecer la conexion 
+            using (SqlConnection con = new(Configuration["ConnectionStrings:BdConexion"]))
             {
-                _context.CrearEquipo(Equipos.Nombre, Equipos.Logo, Equipos.CorreoE, Equipos.Lugar, Equipos.FechaFundacion, Equipos.Descripcion, Equipos.NumIdentificacion, Equipos.IdCampeonato);
-                return RedirectToAction("Index");
+                // Instruccion para ejecutar procedimiento almacenado con la conexion a bd
+                using (SqlCommand cmd = new("spGetEquipos", con))
+                {
+                    //se define el tipo de commandType
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataAdapter da = new(cmd); //ejecutar comando
+                    DataTable dt = new();//creacion de tabla
+                    da.Fill(dt); //llenado de tabla
+                    da.Dispose();  //eliminacion de recursos
+                    List<Equipos> lista = new(); //creando una lista
+
+                    for (int i = 0; i < dt.Rows.Count; i++) //recorrido dentro del data table para agregar a una lista
+                    {
+                        lista.Add(new Equipos() // creacion de objeto de tipo UsuarioModel
+                        {
+                            //Agregando valores para cada parametro del modelo
+                            Id = Convert.ToInt32(dt.Rows[i][0]),
+                            Nombre = dt.Rows[i][1].ToString(),
+                            Logo= Convert.ToByte( dt.Rows[i][2]),
+                            CorreoE = dt.Rows[i][3].ToString(),
+                            Lugar = dt.Rows[i][4].ToString(),
+                            Capitan = dt.Rows[i][5].ToString(),
+                            FechaFundacion=Convert.ToDateTime(dt.Rows[i][6]),
+                            Descripcion = dt.Rows[i][7].ToString(),
+                            NumIdentificacion = Convert.ToInt32(dt.Rows[i][8]),
+                            IdCampeonato = Convert.ToInt32(dt.Rows[i][9]),
+                        });
+                    }
+                    ViewBag.Equipos = lista; //contendra lo que este en la lista
+                    con.Close(); // cerrar conexion
+                }
+                return View();
             }
-            return View();
-
         }
 
-        //metodo para la actualizacion 
-        //GEt de actualizar
-        public IActionResult Actualizar(int id)
+        public IConfiguration Configuration { get; }
+        //constructor
+        public EquiposController(IConfiguration configuration)
         {
-            var Equipo = _context.ObtenerEquipoId(id);
-            return View(Equipo);
+            Configuration = configuration;
         }
-        [HttpPost]
-        public IActionResult Actualizar(Equipos Equipos)
-        {
-            if (ModelState.IsValid && Equipos.Id > 0)
-            {
-                _context.ActualizarEquipo(Equipos.Id, Equipos.Nombre, Equipos.Logo, Equipos.CorreoE, Equipos.Lugar, Equipos.FechaFundacion, Equipos.Descripcion, Equipos.NumIdentificacion, Equipos.IdCampeonato);
-                return RedirectToAction("Index");
-            }
-
-            return View();
-        }
-
-
-        //metodo para Eliminar 
-        //GEt de actualizar
-        public IActionResult Eliminar(int id)
-        {
-            var equipo = _context.ObtenerEquipoId(id);
-            return View(equipo);
-        }
-        [HttpPost]
-        public IActionResult Eliminar(Equipos Equipos)
-        {
-            if (Equipos.Id > 0)
-            {
-                _context.EliminarEquipo(Equipos.Id);
-                return RedirectToAction("Index");
-            }
-
-            return View();
-        }
-
     }
-    }
+}
