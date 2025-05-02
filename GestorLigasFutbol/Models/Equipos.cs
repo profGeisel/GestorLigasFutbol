@@ -19,7 +19,9 @@ namespace GestorLigasFutbol.Models
         [Required(ErrorMessage = "El Lugar es requerido")]
         [StringLength(20, ErrorMessage = "Maximo 20 caracteres")]
         public string Lugar { get; set; }
-
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:DD-MM-YYYY}")]
         public DateTime FechaFundacion { get; set; }
 
         [StringLength(200, ErrorMessage = "Maximo 200 caracteres")]

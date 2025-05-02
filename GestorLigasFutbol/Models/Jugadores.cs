@@ -24,6 +24,8 @@ namespace GestorLigasFutbol.Models
         public int NumeroCamisa { get; set; }
 
         [Required(ErrorMessage = "El año de nacimiento es requerido")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:DD-MM-YYYY}")]
         public DateOnly Fecha_Nacimiento { get; set; }
 
         [Required(ErrorMessage = "La edad es requerida")]

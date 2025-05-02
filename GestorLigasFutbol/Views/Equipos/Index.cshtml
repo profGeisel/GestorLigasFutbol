@@ -1,10 +1,11 @@
-﻿@{
+﻿@model List<Equipos>
+@{
 	ViewData["Title"] = "Equipos";
 }
 
 <div class="container-fluid">
 	<h2>Registros de Equipos</h2>
-	<a type="button" asp-controller="Equipos" asp-action="Registrar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+	<a type="button" asp-controller="Equipos" asp-action="Insertar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
 </div>
 <table class="table">
 	<thead>
@@ -22,31 +23,27 @@
 		</tr>
 	</thead>
 	<tbody>
-		@*programando recorrido de la lista *@
-		@{
-			if (ViewBag.Equipos != null)
+		
+		@foreach (var item in Model)
 			{
-				foreach (var item in ViewBag.Equipos)
-				{
 					//generando las filas por cada registro
-					<tr>
-						<td>@item.Id</td>
-						<td>@item.Nombre</td>
-						<td>@item.Logo</td>
-						<td>@item.CorreoE</td>
-						<td>@item.Lugar</td>
-						<td>@item.Capitan</td>
-						<td>@item.FechaFundacion</td>
-						<td>@item.Descripcion</td>
-						<td>@item.NumeroIdentificacion</td>
-						<td>@item.IdCampeonato</td>
-						<td>
-							<a asp-action="Editar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
-							<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
-							<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
-						</td>
+				<tr>
+				<td>@Html.DisplayFor(modelsItem=> item.Id)</td>
+				<td>@Html.DisplayFor(modelsItem => item.Nombre)</td>
+				<td>@Html.DisplayFor(modelsItem => item.Logo)</td>
+				<td>@Html.DisplayFor(modelsItem => item.CorreoE)</td>
+				<td>@Html.DisplayFor(modelsItem => item.Lugar)</td>
+				<td>@Html.DisplayFor(modelsItem => item.FechaFundacion)</td>
+				<td>@Html.DisplayFor(modelsItem => item.Descripcion)</td>
+				<td>@Html.DisplayFor(modelsItem => item.NumIdentificacion)</td>
+				<td>@Html.DisplayFor(modelsItem => item.IdCampeonato)</td>
+				<td>
+					<a asp-action="Actualizar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+					<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
+					<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
+				</td>
 
-					</tr>
+				</tr>
 				}
 			}
 		}

@@ -44,14 +44,14 @@ namespace GestorLigasFutbol.Data
         }
 
         //metodo para insertar datos a la tabla
-        public void CrearCampeonato(string nombre, DateOnly fechaInicio, DateTime fechaCierre, int numeroEquiposP, string activo, int idLiga) { 
+        public void CrearCampeonato(string nombre, DateTime fechaInicio, DateTime fechaCierre, int numeroEquiposP, string activo, int idLiga) { 
             Database.ExecuteSqlRaw("exec spInsertarCampeonatos {0}, {1}, {2}, {3}, {4}, {5}", nombre, fechaInicio, fechaCierre, numeroEquiposP, activo, idLiga);
         }
 
         //metodo para actualizar datos a la tabla
-        public void ActualizarCampeonato(int id, string nombre, DateOnly fechaInicio, DateTime fechaCierre, int numeroEquiposP, string activo, int idLiga)
+        public void ActualizarCampeonato(int id, string nombre, DateTime fechaInicio, DateTime fechaCierre, int numeroEquiposP, string activo, int idLiga)
         {
-            Database.ExecuteSqlRaw("exec spActualizarCampeonatos{0} ,{1}, {2}, {3}, {4}, {5}, {6}", id, nombre, fechaInicio, fechaCierre, numeroEquiposP, activo, idLiga);
+            Database.ExecuteSqlRaw("exec spActualizarCampeonatos {0} ,{1}, {2}, {3}, {4}, {5}, {6}", id, nombre, fechaInicio, fechaCierre, numeroEquiposP, activo, idLiga);
         }
 
 
