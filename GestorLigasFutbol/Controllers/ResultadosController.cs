@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -24,7 +25,22 @@ namespace GestorLigasFutbol.Controllers
             }
             public IActionResult Insertar()
             {
-                return View();
+                //COMBO EQUIPOS
+                //Crear lista de tipos de Usuarios
+                var equipos = _context.Equipos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+                // Convertir lista a SelectList para el dropdown List
+                ViewBag.Equipos = new SelectList(equipos, "Id", "Nombre");
+
+                //COMBO EVENTOS
+                //Crear lista de tipos de Usuarios
+                var eventos = _context.Eventos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+                // Convertir lista a SelectList para el dropdown List
+                ViewBag.Eventos = new SelectList(eventos, "Id", "Nombre");
+
+
+            return View();
             }
 
             //metodo para crear un usuario
@@ -44,8 +60,21 @@ namespace GestorLigasFutbol.Controllers
             //GEt de actualizar
             public IActionResult Actualizar(int id)
             {
+                //COMBO EQUIPOS
+                //Crear lista de tipos de Usuarios
+                var equipos = _context.Equipos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+                // Convertir lista a SelectList para el dropdown List
+                ViewBag.Equipos = new SelectList(equipos, "Id", "Nombre");
+
+                //COMBO EVENTOS
+                //Crear lista de tipos de Usuarios
+                var eventos = _context.Eventos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+                // Convertir lista a SelectList para el dropdown List
+                ViewBag.Eventos = new SelectList(eventos, "Id", "Nombre");
                 var resultados = _context.ObtenerResultadoId(id);
-                return View(resultados);
+                    return View(resultados);
             }
             [HttpPost]
             public IActionResult Actualizar(Resultados Resultados)

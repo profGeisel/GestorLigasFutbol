@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -24,6 +25,12 @@ namespace GestorLigasFutbol.Controllers
         }
         public IActionResult Insertar()
         {
+            //Crear lista de tipos de Equipos
+            var equipos = _context.Equipos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Equipos = new SelectList(equipos, "Id", "Nombre");
+
             return View();
         }
 
@@ -44,6 +51,12 @@ namespace GestorLigasFutbol.Controllers
         //GEt de actualizar
         public IActionResult Actualizar(int id)
         {
+            //Crear lista de tipos de Equipos
+            var equipos = _context.Equipos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Equipos = new SelectList(equipos, "Id", "Nombre");
+
             var usuario = _context.ObtenerJugadorId(id);
             return View(usuario);
         }

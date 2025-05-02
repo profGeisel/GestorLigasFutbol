@@ -15,12 +15,12 @@
 				<form asp-action="Insertar" method="post" class="form-floating">
 					<div class="form-group">
 						<label asp-for="IdEquipo"></label>
-						<input class="form-control" asp-for=IdEquipo />
+						@Html.DropDownListFor(Model => Model.IdEquipo, (SelectList)ViewBag.Equipos, "Seleccione un Equipo", new { @class = "form-control" })
 						<span asp-validation-for="IdEquipo" class="text-danger"></span>
 					</div>
 					<div class="form-group">
 						<label asp-for="IdEvento"></label>
-						<input class="form-control" asp-for=IdEvento />
+						@Html.DropDownListFor(Model => Model.IdEvento, (SelectList)ViewBag.Eventos, "Seleccione un Evento", new { @class = "form-control" })
 						<span asp-validation-for="IdEvento" class="text-danger"></span>
 					</div>
 					<div class="form-group">

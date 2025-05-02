@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -24,7 +25,12 @@ namespace GestorLigasFutbol.Controllers
             }
             public IActionResult Insertar()
             {
-                return View();
+            //Crear lista de ligas
+            var ligas = _context.Ligas.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.ligas = new SelectList(ligas, "Id", "Nombre");
+            return View();
             }
 
             //metodo para crear un campeonato
@@ -44,7 +50,13 @@ namespace GestorLigasFutbol.Controllers
             //GEt de actualizar
             public IActionResult Actualizar(int id)
             {
-                var campeonato = _context.ObtenerCampeonatoId(id);
+            //Crear lista de ligas
+            var ligas = _context.Ligas.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.ligas = new SelectList(ligas, "Id", "Nombre");
+
+            var campeonato = _context.ObtenerCampeonatoId(id);
                 return View(campeonato);
             }
             [HttpPost]

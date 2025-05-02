@@ -54,8 +54,8 @@
 						<span asp-validation-for="Cedula" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="IdEquipo"></label>
-						<input class="form-control" asp-for=IdEquipo />
+						<label asp-for="IdEquipo">Equipo</label>
+						@Html.DropDownListFor(Model => Model.IdEquipo, (SelectList)ViewBag.Equipos, "Seleccione un tipo", new { @class = "form-control" })
 						<span asp-validation-for="IdEquipo" class="text-danger"></span>
 					</div>
 					<br />

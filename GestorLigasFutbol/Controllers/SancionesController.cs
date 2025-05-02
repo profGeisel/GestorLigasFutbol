@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using GestorLigasFutbol.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -24,6 +25,34 @@ namespace GestorLigasFutbol.Controllers
         }
         public IActionResult Insertar()
         {
+            // COMBO JUGADORES 
+            //Crear lista de tipos de Jugadores
+            var jugadores = _context.Jugadores.Select(c => new { c.Id, c.Nombre, c.ApellidoP }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Jugadores = new SelectList(jugadores, "Id", "Nombre","ApellidoP");
+
+            // COMBO EQUIPOS 
+            //Crear lista de tipos de Jugadores
+            var equipos = _context.Equipos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Equipos = new SelectList(equipos, "Id", "Nombre");
+
+            // COMBO CAMPEONATOS 
+            //Crear lista de tipos de Campeonatos
+            var campeonatos = _context.Campeonatos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Campeonatos = new SelectList(campeonatos, "Id", "Nombre");
+
+            // COMBO IdTipoS 
+            //Crear lista de tipos de Campeonatos
+            var tipoSanciones = _context.TipoSanciones.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.TipoSanciones = new SelectList(tipoSanciones, "Id", "Nombre");
+
             return View();
         }
 
@@ -44,6 +73,34 @@ namespace GestorLigasFutbol.Controllers
         //GEt de actualizar
         public IActionResult Actualizar(int id)
         {
+            // COMBO JUGADORES 
+            //Crear lista de tipos de Jugadores
+            var jugadores = _context.Jugadores.Select(c => new { c.Id, c.Nombre, c.ApellidoP }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Jugadores = new SelectList(jugadores, "Id", "Nombre", "ApellidoP");
+
+            // COMBO EQUIPOS 
+            //Crear lista de tipos de Jugadores
+            var equipos = _context.Equipos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Equipos = new SelectList(equipos, "Id", "Nombre");
+
+            // COMBO CAMPEONATOS 
+            //Crear lista de tipos de Campeonatos
+            var campeonatos = _context.Campeonatos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Campeonatos = new SelectList(campeonatos, "Id", "Nombre");
+
+            // COMBO IdTipoS 
+            //Crear lista de tipos de Campeonatos
+            var tipoSanciones = _context.TipoSanciones.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.TipoSanciones = new SelectList(tipoSanciones, "Id", "Nombre");
+
             var sanciones = _context.ObtenerSancionesId(id);
             return View(sanciones);
         }

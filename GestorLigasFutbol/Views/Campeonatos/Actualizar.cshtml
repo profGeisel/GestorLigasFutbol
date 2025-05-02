@@ -39,12 +39,14 @@
 					</div>
 					<div class="form-group">
 						<label asp-for="Activo"></label>
-						<input class="form-control" asp-for=Activo />
-						<span asp-validation-for="Activo" class="text-danger"></span>
+						<select asp-for="Activo" class="form-control" id="activo" name="Activo">
+							<option value="1" asp-for="Activo">Si</option>
+							<option value="2" asp-for="Activo">No</option>
+						</select>
 					</div>
 					<div class="form-group">
-						<label asp-for="IdLiga"></label>
-						<input class="form-control" asp-for=IdLiga />
+						<label asp-for="IdLiga">Liga</label>
+						@Html.DropDownListFor(Model => Model.IdLiga, (SelectList)ViewBag.Ligas, "Seleccione una liga", new { @class = "form-control" })
 						<span asp-validation-for="IdLiga" class="text-danger"></span>
 					</div>
 					<br />

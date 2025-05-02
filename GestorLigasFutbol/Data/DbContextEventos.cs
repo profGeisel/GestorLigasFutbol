@@ -12,6 +12,8 @@ namespace GestorLigasFutbol.Data
         //-----------------------------------EVENTOS----------------------------------------
         //Creando tabla de Eventos
         public DbSet<Eventos> Eventos { get; set; }
+        public DbSet<Equipos> Equipos { get; set; }
+        public DbSet<Campeonatos> Campeonatos { get; set; }
 
         //metodo 
         protected override void OnModelCreating(ModelBuilder builder)

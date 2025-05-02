@@ -12,7 +12,7 @@ namespace GestorLigasFutbol.Data
         //-----------------------------------JUGADORES----------------------------------------
         //Creando tabla de Jugadores
         public DbSet<Jugadores> Jugadores { get; set; }
-
+        public DbSet<Equipos> Equipos { get; set; }
         //metodo 
         protected override void OnModelCreating(ModelBuilder builder)
         {

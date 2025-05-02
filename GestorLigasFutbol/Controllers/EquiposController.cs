@@ -25,7 +25,13 @@ namespace GestorLigasFutbol.Controllers
         }
         public IActionResult Insertar()
         {
+            //Crear lista de ligas
+            var campeonatos = _context.Campeonatos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Campeonatos = new SelectList(campeonatos, "Id", "Nombre");
             return View();
+            
         }
 
         //metodo para crear un equipos
@@ -45,6 +51,11 @@ namespace GestorLigasFutbol.Controllers
         //GEt de actualizar
         public IActionResult Actualizar(int id)
         {
+            //Crear lista de ligas
+            var campeonatos = _context.Campeonatos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Campeonatos = new SelectList(campeonatos, "Id", "Nombre");
             var Equipo = _context.ObtenerEquipoId(id);
             return View(Equipo);
         }

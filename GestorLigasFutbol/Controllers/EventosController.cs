@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -24,6 +25,21 @@ namespace GestorLigasFutbol.Controllers
         }
         public IActionResult Insertar()
         {
+
+            // COMBO DE EQUIPO VISITANTE/RESIDENTE
+            //Crear lista de tipos de eQUIPOS
+            var equipos = _context.Equipos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Equipos = new SelectList(equipos, "Id", "Nombre");
+
+            // COMBO DE CAMPEONATO
+            //Crear lista de tipos de eQUIPOS
+            var campeonato = _context.Campeonatos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Campeonatos = new SelectList(campeonato, "Id", "Nombre");
+
             return View();
         }
 
@@ -44,6 +60,19 @@ namespace GestorLigasFutbol.Controllers
         //GEt de actualizar
         public IActionResult Actualizar(int id)
         {
+            // COMBO DE EQUIPO VISITANTE/RESIDENTE
+            //Crear lista de tipos de eQUIPOS
+            var equipos = _context.Equipos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Equipos = new SelectList(equipos, "Id", "Nombre");
+
+            // COMBO DE CAMPEONATO
+            //Crear lista de tipos de eQUIPOS
+            var campeonato = _context.Campeonatos.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.Campeonatos = new SelectList(campeonato, "Id", "Nombre"); 
             var evento = _context.ObtenerEventoId(id);
             return View(evento);
         }

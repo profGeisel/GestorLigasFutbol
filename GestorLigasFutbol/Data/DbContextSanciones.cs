@@ -12,6 +12,10 @@ namespace GestorLigasFutbol.Data
         //-----------------------------------Sanciones----------------------------------------
         //Creando tabla de Sanciones
         public DbSet<Sanciones> Sanciones { get; set; }
+        public DbSet<Jugadores> Jugadores { get; set; }
+        public DbSet<Equipos> Equipos { get; set; }
+        public DbSet<Campeonatos> Campeonatos { get; set; }
+        public DbSet<TipoSanciones> TipoSanciones { get; set; }
 
         //metodo 
         protected override void OnModelCreating(ModelBuilder builder)

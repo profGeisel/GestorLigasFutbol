@@ -5,13 +5,15 @@ namespace GestorLigasFutbol.Data
 {
     public class DbContextResultados:DbContext
     {
-        public DbContextResultados(DbContextOptions<DbContextTipoSanciones> options) : base(options)
+        public DbContextResultados(DbContextOptions<DbContextResultados> options) : base(options)
         {
 
         }
         //-----------------------------------TIPO SANCIONES----------------------------------------
         //Creando tabla de Tipos de sanciones
         public DbSet<Resultados> Resultados { get; set; }
+        public DbSet<Equipos> Equipos { get; set; }
+        public DbSet<Eventos> Eventos { get; set; }
 
         //metodo 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -21,7 +23,7 @@ namespace GestorLigasFutbol.Data
             builder.Entity<Resultados>().HasKey(u => u.Id);
             builder.Entity<Resultados>().Property(u => u.IdEquipo).HasColumnName("idEquipo");
             builder.Entity<Resultados>().Property(u => u.IdEvento).HasColumnName("idEvento");
-            builder.Entity<Resultados>().Property(u => u.Triunfos).HasColumnName("triunfos");
+            builder.Entity<Resultados>().Property(u => u.Triunfos).HasColumnName("triufos");
             builder.Entity<Resultados>().Property(u => u.Empates).HasColumnName("empates");
             builder.Entity<Resultados>().Property(u => u.Derrotas).HasColumnName("derrotas");
             builder.Entity<Resultados>().Property(u => u.Juegos).HasColumnName("juegos");

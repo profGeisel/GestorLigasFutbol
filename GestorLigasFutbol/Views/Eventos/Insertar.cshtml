@@ -30,17 +30,18 @@
 					</div>
 					<div class="form-group">
 						<label asp-for="EquipoVisitante"></label>
-						<input class="form-control" asp-for=EquipoVisitante />
+						@Html.DropDownListFor(Model => Model.EquipoVisitante, (SelectList)ViewBag.Equipos, "Seleccione un Equipo", new { @class = "form-control" })
 						<span asp-validation-for="EquipoVisitante" class="text-danger"></span>
 					</div>
+					
 					<div class="form-group">
 						<label asp-for="EquipoResidente"></label>
-						<input class="form-control" asp-for=EquipoResidente />
+						@Html.DropDownListFor(Model => Model.EquipoResidente, (SelectList)ViewBag.Equipos, "Seleccione un Equipo", new { @class = "form-control" })
 						<span asp-validation-for="EquipoResidente" class="text-danger"></span>
 					</div>
 					<div class="form-group">
 						<label asp-for="IdCampeonato"></label>
-						<input class="form-control" asp-for=IdCampeonato />
+						@Html.DropDownListFor(Model => Model.IdCampeonato, (SelectList)ViewBag.Campeonatos, "Seleccione un Equipo", new { @class = "form-control" })
 						<span asp-validation-for="IdCampeonato" class="text-danger"></span>
 					</div>
 					<br />
