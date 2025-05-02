@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using GestorLigasFutbol.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -72,7 +73,7 @@ namespace GestorLigasFutbol.Controllers
             var campeonato = _context.Campeonatos.Select(c => new { c.Id, c.Nombre }).ToList();
 
             // Convertir lista a SelectList para el dropdown List
-            ViewBag.Campeonatos = new SelectList(campeonato, "Id", "Nombre"); 
+            ViewBag.Campeonatos = new SelectList(campeonato, "Id", "Nombre");
             var evento = _context.ObtenerEventoId(id);
             return View(evento);
         }
@@ -108,6 +109,6 @@ namespace GestorLigasFutbol.Controllers
             return View();
         }
 
-
+       
     }
 }

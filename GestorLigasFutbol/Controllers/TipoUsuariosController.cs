@@ -20,10 +20,6 @@ namespace GestorLigasFutbol.Controllers
             _context = context;
         }
 
-        public TipoUsuariosController()
-        {
-        }
-
         public IActionResult Index()
         {
             var tipoUsuarios = _context.ObtenerTipoUsuarios().ToList();
