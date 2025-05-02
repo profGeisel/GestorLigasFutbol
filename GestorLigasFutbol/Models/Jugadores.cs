@@ -18,15 +18,13 @@ namespace GestorLigasFutbol.Models
         [StringLength(20, ErrorMessage = "Maximo 20 caracteres")]
         public string ApellidoM { get; set; }
 
-        public byte Foto { get; set; }
-
         [Required(ErrorMessage = "El numero de camiseta es requerido")]
         public int NumeroCamisa { get; set; }
 
         [Required(ErrorMessage = "El año de nacimiento es requerido")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:DD-MM-YYYY}")]
-        public DateOnly Fecha_Nacimiento { get; set; }
+        public DateTime Fecha_Nacimiento { get; set; }
 
         [Required(ErrorMessage = "La edad es requerida")]
         public int Edad { get; set; }

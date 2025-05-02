@@ -26,5 +26,7 @@ namespace GestorLigasFutbol.Models
 
         [Required(ErrorMessage = "El tipo de Usuario es requerida")]
         public int IdTipoUsuarios { get; set; }
+
+        
     }
 }

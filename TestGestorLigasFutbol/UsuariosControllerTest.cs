@@ -11,12 +11,8 @@ namespace TestGestorLigasFutbol
     public class UsuariosControllerTest
     {
         [Fact]
+
         public void InsertarTestr()
-        {
-            //var insertar = new UsuariosController();
-            //var resultado = insertar.Insertar();
-           // Assert.NotNull(resultado);
-            
-        }
+        { }
     }
 }

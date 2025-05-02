@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -52,7 +53,7 @@ namespace GestorLigasFutbol.Controllers
         {
             if (ModelState.IsValid && Equipos.Id > 0)
             {
-                _context.ActualizarEquipo(Equipos.Id, Equipos.Nombre,  Equipos.CorreoE, Equipos.Lugar, Equipos.FechaFundacion, Equipos.Descripcion, Equipos.NumIdentificacion, Equipos.IdCampeonato);
+                _context.ActualizarEquipo(Equipos.Id, Equipos.Nombre, Equipos.CorreoE, Equipos.Lugar, Equipos.FechaFundacion, Equipos.Descripcion, Equipos.NumIdentificacion, Equipos.IdCampeonato);
                 return RedirectToAction("Index");
             }
 
@@ -79,5 +80,6 @@ namespace GestorLigasFutbol.Controllers
             return View();
         }
 
+
     }
-    }
+}

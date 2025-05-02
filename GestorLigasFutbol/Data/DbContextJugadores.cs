@@ -5,7 +5,7 @@ namespace GestorLigasFutbol.Data
 {
     public class DbContextJugadores : DbContext
     {
-        public DbContextJugadores(DbContextOptions<DbContextUsuarios> options) : base(options)
+        public DbContextJugadores(DbContextOptions<DbContextJugadores> options) : base(options)
         {
 
         }
@@ -23,8 +23,7 @@ namespace GestorLigasFutbol.Data
             builder.Entity<Jugadores>().Property(u => u.Nombre).HasColumnName("nombre");
             builder.Entity<Jugadores>().Property(u => u.ApellidoP).HasColumnName("apellidoP");
             builder.Entity<Jugadores>().Property(u => u.ApellidoM).HasColumnName("ApellidoM");
-            builder.Entity<Jugadores>().Property(u => u.Foto).HasColumnName("foto");
-            builder.Entity<Jugadores>().Property(u => u.NumeroCamisa).HasColumnName("numeroCamissa");
+            builder.Entity<Jugadores>().Property(u => u.NumeroCamisa).HasColumnName("numeroCamisa");
             builder.Entity<Jugadores>().Property(u => u.Fecha_Nacimiento).HasColumnName("fechaNacimiento");
             builder.Entity<Jugadores>().Property(u => u.Edad).HasColumnName("edad");
             builder.Entity<Jugadores>().Property(u => u.Cedula).HasColumnName("cedula");
@@ -47,15 +46,15 @@ namespace GestorLigasFutbol.Data
         }
 
         //metodo para insertar datos a la tabla
-        public void CrearJugador(string nombre, string apellidoP, string apellidoM, byte foto, int numeroCamisa, DateOnly fechaNacimiento, int edad, string cedula, int idEquipo)
+        public void CrearJugador(string nombre, string apellidoP, string apellidoM,  int numeroCamisa, DateTime fechaNacimiento, int edad, string cedula, int idEquipo)
         {
-            Database.ExecuteSqlRaw("exec spInsertarJugadores {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", nombre, apellidoP, apellidoM, foto, numeroCamisa, fechaNacimiento, edad, cedula, idEquipo);
+            Database.ExecuteSqlRaw("exec spInsertarJugadores {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", nombre, apellidoP, apellidoM,  numeroCamisa, fechaNacimiento, edad, cedula, idEquipo);
         }
 
         //metodo para actualizar datos a la tabla
-        public void ActualizarJugador(int id, string nombre, string apellidoP, string apellidoM, byte foto, int numeroCamisa, DateOnly fechaNacimiento, int edad, string cedula, int idEquipo)
+        public void ActualizarJugador(int id, string nombre, string apellidoP, string apellidoM, int numeroCamisa, DateTime fechaNacimiento, int edad, string cedula, int idEquipo)
         {
-            Database.ExecuteSqlRaw("exec spActualizarJugadores {0} ,{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}", id, nombre, apellidoP, apellidoM, foto, numeroCamisa, fechaNacimiento, edad, cedula, idEquipo);
+            Database.ExecuteSqlRaw("exec spActualizarJugadores {0} ,{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", id, nombre, apellidoP, apellidoM,  numeroCamisa, fechaNacimiento, edad, cedula, idEquipo);
         }
 
 

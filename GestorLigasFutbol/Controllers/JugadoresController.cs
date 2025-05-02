@@ -3,6 +3,7 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
+using GestorLigasFutbol.Data;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -10,55 +11,76 @@ namespace GestorLigasFutbol.Controllers
     // [Authorize]
     public class JugadoresController : Controller
     {
+        private readonly DbContextJugadores _context;
+        public JugadoresController(DbContextJugadores context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
-            //Establecer la conexion 
-            using (SqlConnection con = new(Configuration["ConnectionStrings:BdConexion"]))
-            {
-                // Instruccion para ejecutar procedimiento almacenado con la conexion a bd
-                using (SqlCommand cmd = new("spGetJugadores", con))
-                {
-                    //se define el tipo de commandType
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    con.Open();
-                    SqlDataAdapter da = new(cmd); //ejecutar comando
-                    DataTable dt = new();//creacion de tabla
-                    da.Fill(dt); //llenado de tabla
-                    da.Dispose();  //eliminacion de recursos
-                    List<Jugadores> lista = new(); //creando una lista
+            var jugadores = _context.ObtenerJugadores().ToList();
 
-                    for (int i = 0; i < dt.Rows.Count; i++) //recorrido dentro del data table para agregar a una lista
-                    {
-                        lista.Add(new Jugadores() // creacion de objeto de tipo UsuarioModel
-                        {
-                            //Agregando valores para cada parametro del modelo
-                            Id = Convert.ToInt32(dt.Rows[i][0]),
-                            Nombre = dt.Rows[i][1].ToString(),
-                            ApellidoP=dt.Rows[i][2].ToString(),
-                            ApellidoM=dt.Rows[i][3].ToString(),
-                            Foto =Convert.ToByte( dt.Rows[i][4]),
-                            NumeroCamisa= Convert.ToInt32(dt.Rows [i][5]),
-                            
-                            Edad = Convert.ToInt32(dt.Rows[i][7]),
-                            Cedula= dt.Rows[i][8].ToString(),
-                            IdEquipo = Convert.ToInt32(dt.Rows[i][9]),
-
-                            
-                        });
-                    }
-                    ViewBag.Jugadores = lista; //contendra lo que este en la lista
-                    con.Close(); // cerrar conexion
-                }
-                return View();
-            }
+            return View(jugadores);
         }
-
-        public IConfiguration Configuration { get; }
-        //constructor
-        public JugadoresController(IConfiguration configuration)
+        public IActionResult Insertar()
         {
-            Configuration = configuration;
+            return View();
         }
+
+        //metodo para crear un usuario
+        [HttpPost]
+        public IActionResult Insertar(Jugadores Jugadores)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.CrearJugador(Jugadores.Nombre, Jugadores.ApellidoP, Jugadores.ApellidoM, Jugadores.NumeroCamisa, Jugadores.Fecha_Nacimiento, Jugadores.Edad, Jugadores.Cedula,Jugadores.IdEquipo);
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+
+        //metodo para la actualizacion 
+        //GEt de actualizar
+        public IActionResult Actualizar(int id)
+        {
+            var usuario = _context.ObtenerJugadorId(id);
+            return View(usuario);
+        }
+        [HttpPost]
+        public IActionResult Actualizar(Jugadores Jugadores)
+        {
+            if (ModelState.IsValid && Jugadores.Id > 0)
+            {
+                _context.ActualizarJugador(Jugadores.Id, Jugadores.Nombre, Jugadores.ApellidoP, Jugadores.ApellidoM, Jugadores.NumeroCamisa, Jugadores.Fecha_Nacimiento, Jugadores.Edad, Jugadores.Cedula, Jugadores.IdEquipo);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+
+        //metodo para Eliminar 
+        //GEt de actualizar
+        public IActionResult Eliminar(int id)
+        {
+            var jugador = _context.ObtenerJugadorId(id);
+            return View(jugador);
+        }
+        [HttpPost]
+        public IActionResult Eliminar(Jugadores Jugadores)
+        {
+            if (Jugadores.Id > 0)
+            {
+                _context.EliminarJugador(Jugadores.Id);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+       
+
     }
 
 }

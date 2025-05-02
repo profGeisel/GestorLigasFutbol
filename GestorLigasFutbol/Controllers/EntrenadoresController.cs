@@ -3,6 +3,7 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
+using GestorLigasFutbol.Data;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -10,54 +11,75 @@ namespace GestorLigasFutbol.Controllers
    // [Authorize]
     public class EntrenadoresController : Controller
     {
+        private readonly DbContextEntrenadores _context;
+        public EntrenadoresController(DbContextEntrenadores context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
-            //Establecer la conexion 
-            using (SqlConnection con = new(Configuration["ConnectionStrings:BdConexion"]))
-            {
-                // Instruccion para ejecutar procedimiento almacenado con la conexion a bd
-                using (SqlCommand cmd = new("spGetEntrenadores", con))
-                {
-                    //se define el tipo de commandType
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    con.Open();
-                    SqlDataAdapter da = new(cmd); //ejecutar comando
-                    DataTable dt = new();//creacion de tabla
-                    da.Fill(dt); //llenado de tabla
-                    da.Dispose();  //eliminacion de recursos
-                    List<Entrenadores> lista = new(); //creando una lista
+            var entrenadores = _context.ObtenerEntrenadores().ToList();
 
-                    for (int i = 0; i < dt.Rows.Count; i++) //recorrido dentro del data table para agregar a una lista
-                    {
-                        lista.Add(new Entrenadores() // creacion de objeto de tipo UsuarioModel
-                        {
-                            //Agregando valores para cada parametro del modelo
-                            Id = Convert.ToInt32(dt.Rows[i][0]),
-                            Nombre = dt.Rows[i][1].ToString(),
-                            ApellidoP = dt.Rows[i][2].ToString(),
-                            ApellidoM = dt.Rows[i][3].ToString(),
-                            Foto = Convert.ToByte(dt.Rows[i][4]),
-                            FechaNacimiento = Convert.ToDateTime(dt.Rows[i][5]),
-                            CorreoE = dt.Rows[i][6].ToString(),
-                            Cedula = dt.Rows[i][8].ToString(),
-                            IdEquipo = Convert.ToInt32(dt.Rows[i][9]),
-
-
-                        });
-                    }
-                    ViewBag.Entrenadores = lista; //contendra lo que este en la lista
-                    con.Close(); // cerrar conexion
-                }
-                return View();
-            }
+            return View(entrenadores);
         }
-
-        public IConfiguration Configuration { get; }
-        //constructor
-        public EntrenadoresController(IConfiguration configuration)
+        public IActionResult Insertar()
         {
-            Configuration = configuration;
+            return View();
         }
+
+        //metodo para crear un usuario
+        [HttpPost]
+        public IActionResult Insertar(Entrenadores Entrenadores)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.CrearEntrenador(Entrenadores.Nombre, Entrenadores.ApellidoP, Entrenadores.ApellidoM, Entrenadores.FechaNacimiento, Entrenadores.CorreoE, Entrenadores.Cedula, Entrenadores.IdEquipo);
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+
+        //metodo para la actualizacion 
+        //GEt de actualizar
+        public IActionResult Actualizar(int id)
+        {
+            var usuario = _context.ObtenerEntrenadorId(id);
+            return View(usuario);
+        }
+        [HttpPost]
+        public IActionResult Actualizar(Entrenadores Entrenadores)
+        {
+            if (ModelState.IsValid && Entrenadores.Id > 0)
+            {
+                _context.ActualizarEntrenador(Entrenadores.Id, Entrenadores.Nombre, Entrenadores.ApellidoP, Entrenadores.ApellidoM, Entrenadores.FechaNacimiento, Entrenadores.CorreoE, Entrenadores.Cedula, Entrenadores.IdEquipo);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+
+        //metodo para Eliminar 
+        //GEt de actualizar
+        public IActionResult Eliminar(int id)
+        {
+            var entrenador = _context.ObtenerEntrenadorId(id);
+            return View(entrenador);
+        }
+        [HttpPost]
+        public IActionResult Eliminar(Entrenadores Entrenadores)
+        {
+            if (Entrenadores.Id > 0)
+            {
+                _context.EliminarEntrenador(Entrenadores.Id);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+
     }
 
 }

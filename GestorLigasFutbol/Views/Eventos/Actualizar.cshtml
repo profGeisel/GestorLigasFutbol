@@ -2,15 +2,15 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-@model Usuarios //referenccia al modelo usuario
+@model Eventos //referenccia al modelo Eventos
 @{
-	ViewData["Title"] = "Eliminando usuario"; //titulo de la pagina
+	ViewData["Title"] = "Registro de Eventos"; //titulo de la pagina
 }
 
 <div class="container">
 	<div id="registroUs" style="margin-top:50px; margin-bottom:50px;" class=" mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<div class="panel panel-info">
-			<h2 class="text-center">Actualizar Usuario</h2>
+			<h2 class="text-center">Actualizar Evento</h2>
 			<div style="padding-top:30px" class="panel-body">
 				<form asp-action="Actualizar" method="post" class="form-floating">
 					<div class="form-group">
@@ -23,29 +23,29 @@
 						<span asp-validation-for="Nombre" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="ApellidoP"></label>
-						<input class="form-control" asp-for=ApellidoP />
-						<span asp-validation-for="ApellidoP" class="text-danger"></span>
+						<label asp-for="Fecha"></label>
+						<input class="form-control" asp-for=Fecha />
+						<span asp-validation-for="Fecha" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="ApellidoM"></label>
-						<input class="form-control" asp-for=ApellidoM />
-						<span asp-validation-for="ApellidoM" class="text-danger"></span>
+						<label asp-for="Hora"></label>
+						<input class="form-control" asp-for=Hora />
+						<span asp-validation-for="Hora" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="CorreoE"></label>
-						<input class="form-control" asp-for=CorreoE />
-						<span asp-validation-for="CorreoE" class="text-danger"></span>
+						<label asp-for="EquipoVisitante"></label>
+						<input class="form-control" asp-for=EquipoVisitante />
+						<span asp-validation-for="EquipoVisitante" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="Contrasena"></label>
-						<input class="form-control" asp-for=Contrasena />
-						<span asp-validation-for="Contrasena" class="text-danger"></span>
+						<label asp-for="EquipoResidente"></label>
+						<input class="form-control" asp-for=EquipoResidente />
+						<span asp-validation-for="EquipoResidente" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="IdTipoUsuarios">Tipo de Usuario</label>
-						@Html.DropDownListFor(Model => Model.IdTipoUsuarios, (SelectList)ViewBag.tipoUsuarios, "Seleccione un tipo", new { @class = "form-control" })
-						<span asp-validation-for="IdTipoUsuarios" class="text-danger"></span>
+						<label asp-for="IdCampeonato"></label>
+						<input class="form-control" asp-for=IdCampeonato />
+						<span asp-validation-for="IdCampeonato" class="text-danger"></span>
 					</div>
 					<br />
 					<div class="text-center col-sm-12 controls panel-body">

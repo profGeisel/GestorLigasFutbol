@@ -9,6 +9,7 @@ namespace GestorLigasFutbol.Data
         {
 
         }
+
         //-----------------------------------Tipo USUARIOS----------------------------------------
         //Creando tabla de Tipo Usuarios
         public DbSet<TipoUsuarios> TipoUsuarios { get; set; }

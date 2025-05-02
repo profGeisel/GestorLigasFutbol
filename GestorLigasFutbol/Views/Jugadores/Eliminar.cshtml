@@ -1,0 +1,77 @@
+﻿
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+@model Jugadores //referenccia al modelo Jugadores
+@{
+	ViewData["Title"] = "Registro de Jugadores"; //titulo de la pagina
+}
+
+<div class="container">
+	<div id="registroUs" style="margin-top:50px; margin-bottom:50px;" class=" mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-info">
+			<h2 class="text-center">Eliminando de Jugadores</h2>
+			<div style="padding-top:30px" class="panel-body">
+				<form asp-action="Eliminar" method="post" class="form-floating">
+					<div class="form-group">
+						<label asp-for="Id"></label>
+						<input class="form-control" asp-for=Id readonly />
+						<span asp-validation-for="Id" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Nombre"></label>
+						<input class="form-control" asp-for=Nombre readonly />
+						<span asp-validation-for="Nombre" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="ApellidoP"></label>
+						<input class="form-control" asp-for=ApellidoP readonly />
+						<span asp-validation-for="ApellidoP" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="ApellidoM"></label>
+						<input class="form-control" asp-for=ApellidoM readonly />
+						<span asp-validation-for="ApellidoM" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="NumeroCamisa"></label>
+						<input class="form-control" asp-for=NumeroCamisa readonly />
+						<span asp-validation-for="NumeroCamisa" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Fecha_Nacimiento"></label>
+						<input class="form-control" asp-for=Fecha_Nacimiento readonly />
+						<span asp-validation-for="Fecha_Nacimiento" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Edad"></label>
+						<input class="form-control" asp-for=Edad readonly />
+						<span asp-validation-for="Edad" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Cedula"></label>
+						<input class="form-control" asp-for=Cedula readonly />
+						<span asp-validation-for="Cedula" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="IdEquipo"></label>
+						<input class="form-control" asp-for=IdEquipo readonly />
+						<span asp-validation-for="IdEquipo" class="text-danger"></span>
+					</div>
+					
+					<br />
+					<div class="text-center col-sm-12 controls panel-body">
+						<button type="submit" value="Eliminar" class="btn btn-sm btn-warning">Eliminar</button>
+						<a asp-action="Index" class="btn btn-sm btn-secondary">Regresar a la lista</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

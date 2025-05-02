@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GestorLigasFutbol.Data;
 using GestorLigasFutbol.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 
 
@@ -15,6 +17,8 @@ namespace GestorLigasFutbol.Controllers
         {
             _context = context;
         }
+
+
         public IActionResult Index()
         {
             var usuarios = _context.ObtenerUsuarios().ToList();
@@ -23,13 +27,21 @@ namespace GestorLigasFutbol.Controllers
         }
         public IActionResult Insertar()
         {
-            return View();  
+            //Crear lista de tipos de Usuarios
+            var tipoUsuarios = _context.TipoUsuarios.Select( c=>new {c.Id,c.Nombre}).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.TipoUsuarios = new SelectList(tipoUsuarios, "Id", "Nombre");
+
+            return View();
+         
         }
 
         //metodo para crear un usuario
         [HttpPost]
         public IActionResult Insertar(Usuarios Usuarios)
         {
+
             if (ModelState.IsValid ){
                 _context.CrearUsuario(Usuarios.Nombre, Usuarios.ApellidoP, Usuarios.ApellidoM, Usuarios.CorreoE, Usuarios.Contrasena, Usuarios.IdTipoUsuarios);
             return RedirectToAction("Index");
@@ -42,7 +54,14 @@ namespace GestorLigasFutbol.Controllers
         //GEt de actualizar
         public IActionResult Actualizar(int id)
         {
+            //Crear lista de tipos de Usuarios
+            var tipoUsuarios = _context.TipoUsuarios.Select(c => new { c.Id, c.Nombre }).ToList();
+
+            // Convertir lista a SelectList para el dropdown List
+            ViewBag.TipoUsuarios = new SelectList(tipoUsuarios, "Id", "Nombre");
+
             var usuario = _context.ObtenerUsuarioId(id);
+           
             return View(usuario);
         }
         [HttpPost]
