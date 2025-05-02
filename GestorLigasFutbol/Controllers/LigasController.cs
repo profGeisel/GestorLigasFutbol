@@ -3,6 +3,7 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
+using GestorLigasFutbol.Data;
 
 namespace GestorLigasFutbol.Controllers
 {
@@ -10,48 +11,76 @@ namespace GestorLigasFutbol.Controllers
     // [Authorize]
     public class LigasController : Controller
     {
+       
+        private readonly DbContextLigas _context;
+        public LigasController(DbContextLigas context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
-            //Establecer la conexion 
-            using (SqlConnection con = new(Configuration["ConnectionStrings:BdConexion"]))
-            {
-                // Instruccion para ejecutar procedimiento almacenado con la conexion a bd
-                using (SqlCommand cmd = new("spGetLigas", con))
-                {
-                    //se define el tipo de commandType
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    con.Open();
-                    SqlDataAdapter da = new(cmd); //ejecutar comando
-                    DataTable dt = new();//creacion de tabla
-                    da.Fill(dt); //llenado de tabla
-                    da.Dispose();  //eliminacion de recursos
-                    List<Ligas> lista = new(); //creando una lista
+            var ligas = _context.ObtenerLigas().ToList();
 
-                    for (int i = 0; i < dt.Rows.Count; i++) //recorrido dentro del data table para agregar a una lista
-                    {
-                        lista.Add(new Ligas() // creacion de objeto de tipo UsuarioModel
-                        {
-                            //Agregando valores para cada parametro del modelo
-                            Id = Convert.ToInt32(dt.Rows[i][0]),
-                            Nombre = dt.Rows[i][1].ToString(),
-                            Descripcion = dt.Rows[i][2].ToString(),
-                            CorreoE = dt.Rows[i][3].ToString(),
-                            Telefono = dt.Rows[i][4].ToString(),
-                        });
-                    }
-                    ViewBag.Ligas = lista; //contendra lo que este en la lista
-                    con.Close(); // cerrar conexion
-                }
-                return View();
-            }
+            return View(ligas);
         }
-
-        public IConfiguration Configuration { get; }
-        //constructor
-        public LigasController(IConfiguration configuration)
+        public IActionResult Insertar()
         {
-            Configuration = configuration;
+            return View();
         }
+
+        //metodo para crear un usuario
+        [HttpPost]
+        public IActionResult Insertar(Ligas Ligas)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.CrearLiga(Ligas.Nombre, Ligas.Descripcion, Ligas.CorreoE, Ligas.Telefono);
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+
+        //metodo para la actualizacion 
+        //GEt de actualizar
+        public IActionResult Actualizar(int id)
+        {
+            var liga = _context.ObtenerLigasId(id);
+            return View(liga);
+        }
+        [HttpPost]
+        public IActionResult Actualizar(Ligas Ligas)
+        {
+            if (ModelState.IsValid && Ligas.Id > 0)
+            {
+                _context.ActualizarLiga(Ligas.Id, Ligas.Nombre, Ligas.Descripcion, Ligas.CorreoE, Ligas.Telefono);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+
+        //metodo para Eliminar 
+        //GEt de actualizar
+        public IActionResult Eliminar(int id)
+        {
+            var liga = _context.ObtenerLigasId(id);
+            return View(liga);
+        }
+        [HttpPost]
+        public IActionResult Eliminar(Ligas Ligas)
+        {
+            if (Ligas.Id > 0)
+            {
+                _context.EliminarLiga(Ligas.Id);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+
     }
-    
+
 }

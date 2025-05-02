@@ -38,14 +38,14 @@ namespace GestorLigasFutbol.Data
         //metodo para retornar un usuario segun un id
         public Ligas ObtenerLigasId(int id)
         {
-            var ligas = Ligas.FromSqlInterpolated($"exec spGetLigas {id}").AsEnumerable().FirstOrDefault();
+            var ligas = Ligas.FromSqlInterpolated($"exec spGetLiga {id}").AsEnumerable().FirstOrDefault();
             return ligas;
         }
 
         //metodo para insertar datos a la tabla
         public void CrearLiga(string nombre, string descripcion, string correoE, string telefono)
         {
-            Database.ExecuteSqlRaw("exec spInsertarTipoSanciones {0}, {1}, {2}, {3}", nombre, descripcion, correoE, telefono);
+            Database.ExecuteSqlRaw("exec spInsertarLigas {0}, {1}, {2}, {3}", nombre, descripcion, correoE, telefono);
         }
 
         //metodo para actualizar datos a la tabla

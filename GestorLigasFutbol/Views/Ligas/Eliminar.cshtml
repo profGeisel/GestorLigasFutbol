@@ -2,55 +2,41 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-@model Equipos //referenccia al modelo Equipos
+@model Ligas //referenccia al modelo Ligas
 @{
-	ViewData["Title"] = "Registro de Equipos"; //titulo de la pagina
+	ViewData["Title"] = "Registro de Ligas"; //titulo de la pagina
 }
 
 <div class="container">
 	<div id="registroUs" style="margin-top:50px; margin-bottom:50px;" class=" mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<div class="panel panel-info">
-			<h2 class="text-center">Eliminando de Equipos</h2>
+			<h2 class="text-center">Eliminando de Ligas</h2>
 			<div style="padding-top:30px" class="panel-body">
 				<form asp-action="Eliminar" method="post" class="form-floating">
 					<div class="form-group">
 						<label asp-for="Id"></label>
-						<input class="form-control" asp-for="Id" readonly />
+						<input class="form-control" asp-for=Id readonly />
+						<span asp-validation-for="Id" class="text-danger"></span>
 					</div>
 					<div class="form-group">
 						<label asp-for="Nombre"></label>
-						<input class="form-control" asp-for=Nombre readonly />
+						<input class="form-control" asp-for=Nombre readonly/>
 						<span asp-validation-for="Nombre" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="CorreoE"></label>
-						<input class="form-control" asp-for=CorreoE readonly />
-						<span asp-validation-for="CorreoE" class="text-danger"></span>
-					</div>
-					<div class="form-group">
-						<label asp-for="Lugar"></label>
-						<input class="form-control" asp-for=Lugar readonly />
-						<span asp-validation-for="Lugar" class="text-danger"></span>
-					</div>
-					<div class="form-group">
-						<label asp-for="FechaFundacion"></label>
-						<input class="form-control" asp-for=FechaFundacion readonly />
-						<span asp-validation-for="FechaFundacion" class="text-danger"></span>
-					</div>
-					<div class="form-group">
 						<label asp-for="Descripcion"></label>
-						<input class="form-control" asp-for=Descripcion readonly />
+						<input class="form-control" asp-for=Descripcion readonly/>
 						<span asp-validation-for="Descripcion" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="NumIdentificacion"></label>
-						<input class="form-control" asp-for=NumIdentificacion />
-						<span asp-validation-for="NumIdentificacion" class="text-danger"></span>
+						<label asp-for="CorreoE"></label>
+						<input class="form-control" asp-for=CorreoE readonly/>
+						<span asp-validation-for="CorreoE" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="IdCampeonato"></label>
-						<input class="form-control" asp-for=IdCampeonato />
-						<span asp-validation-for="IdCampeonato" class="text-danger"></span>
+						<label asp-for="Telefono"></label>
+						<input class="form-control" asp-for=Telefono readonly/>
+						<span asp-validation-for="Telefono" class="text-danger"></span>
 					</div>
 					<br />
 					<div class="text-center col-sm-12 controls panel-body">

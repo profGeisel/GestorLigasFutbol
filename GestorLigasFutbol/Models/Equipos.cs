@@ -10,7 +10,6 @@ namespace GestorLigasFutbol.Models
         [Required(ErrorMessage = "El nombre es requerido")]
         [StringLength(20, ErrorMessage = "Maximo 20 caracteres")]
         public string Nombre { get; set; }
-        public byte Logo   { get; set; }
 
         [Required(ErrorMessage = "El correo es requerido")]
         [StringLength(320, ErrorMessage = "Maximo 320 caracteres")]
@@ -29,7 +28,7 @@ namespace GestorLigasFutbol.Models
 
         [Required(ErrorMessage = "El numero de identificaci[on es requerido")]
         [StringLength(12, ErrorMessage = "Maximo 12 caracteres")]
-        public int NumIdentificacion { get; set; }
+        public string NumIdentificacion { get; set; }
 
         [Required(ErrorMessage = "El Campeonato es requerido")]
         public int IdCampeonato { get; set; }

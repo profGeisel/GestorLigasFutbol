@@ -33,7 +33,7 @@ namespace GestorLigasFutbol.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.CrearEquipo(Equipos.Nombre, Equipos.Logo, Equipos.CorreoE, Equipos.Lugar, Equipos.FechaFundacion, Equipos.Descripcion, Equipos.NumIdentificacion, Equipos.IdCampeonato);
+                _context.CrearEquipo(Equipos.Nombre, Equipos.CorreoE, Equipos.Lugar, Equipos.FechaFundacion, Equipos.Descripcion, Equipos.NumIdentificacion, Equipos.IdCampeonato);
                 return RedirectToAction("Index");
             }
             return View();
@@ -52,7 +52,7 @@ namespace GestorLigasFutbol.Controllers
         {
             if (ModelState.IsValid && Equipos.Id > 0)
             {
-                _context.ActualizarEquipo(Equipos.Id, Equipos.Nombre, Equipos.Logo, Equipos.CorreoE, Equipos.Lugar, Equipos.FechaFundacion, Equipos.Descripcion, Equipos.NumIdentificacion, Equipos.IdCampeonato);
+                _context.ActualizarEquipo(Equipos.Id, Equipos.Nombre,  Equipos.CorreoE, Equipos.Lugar, Equipos.FechaFundacion, Equipos.Descripcion, Equipos.NumIdentificacion, Equipos.IdCampeonato);
                 return RedirectToAction("Index");
             }
 
