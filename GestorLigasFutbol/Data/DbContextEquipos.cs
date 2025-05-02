@@ -9,8 +9,8 @@ namespace GestorLigasFutbol.Data
         {
 
         }
-        //-----------------------------------USUARIOS----------------------------------------
-        //Creando tabla de Usuarios
+        //-----------------------------------EQUIPOS----------------------------------------
+        //Creando tabla de Equipos
         public DbSet<Equipos> Equipos { get; set; }
 
         //metodo 
@@ -21,6 +21,7 @@ namespace GestorLigasFutbol.Data
             builder.Entity<Equipos>().HasKey(u => u.Id);
             builder.Entity<Equipos>().Property(u => u.Id).HasColumnName("id");
             builder.Entity<Equipos>().Property(u => u.Nombre).HasColumnName("nombre");
+            builder.Entity<Equipos>().Property(u => u.Logo).HasColumnName("logo");
             builder.Entity<Equipos>().Property(u => u.CorreoE).HasColumnName("correoE");
             builder.Entity<Equipos>().Property(u => u.Lugar).HasColumnName("lugar");
             builder.Entity<Equipos>().Property(u => u.FechaFundacion).HasColumnName("fechaFundacion");
@@ -37,23 +38,23 @@ namespace GestorLigasFutbol.Data
 
         }
 
-        //metodo para retornar un usuario segun un id
+        //metodo para retornar un Equipo segun un id
         public Equipos ObtenerEquipoId(int id)
         {
-            var Equipo = Equipos.FromSqlInterpolated($"exec spGetEquipos {id}").AsEnumerable().FirstOrDefault();
+            var Equipo = Equipos.FromSqlInterpolated($"exec spGetEquipo {id}").AsEnumerable().FirstOrDefault();
             return Equipo;
         }
 
         //metodo para insertar datos a la tabla
-        public void CrearEquipo(string nombre, string correoE, string lugar, string capitan, DateOnly fechaFundacion, string descripcion, int numIdentificacion, int idCampeonato)
+        public void CrearEquipo(string nombre, byte logo, string correoE, string lugar, DateTime fechaFundacion, string descripcion, int numIdentificacion, int idCampeonato)
         {
-            Database.ExecuteSqlRaw("exec spInsertarEquipos {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", nombre, correoE, lugar, capitan, fechaFundacion, descripcion, numIdentificacion, idCampeonato);
+            Database.ExecuteSqlRaw("exec spInsertarEquipos {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", nombre,logo,  correoE, lugar, fechaFundacion, descripcion, numIdentificacion, idCampeonato);
         }
 
         //metodo para actualizar datos a la tabla
-        public void ActualizarEquipo(int id, string nombre, string correoE, string lugar, string capitan, DateOnly fechaFundacion, string descripcion, int numIdentificacion, int idCampeonato)
+        public void ActualizarEquipo(int id, string nombre, byte logo, string correoE, string lugar, DateTime fechaFundacion, string descripcion, int numIdentificacion, int idCampeonato)
         {
-            Database.ExecuteSqlRaw("exec spActualizarEquipos {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}",id, nombre, correoE, lugar, capitan, fechaFundacion, descripcion, numIdentificacion, idCampeonato);
+            Database.ExecuteSqlRaw("exec spActualizarEquipos {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}",id, nombre, logo, correoE, lugar, fechaFundacion, descripcion, numIdentificacion, idCampeonato);
         }
 
 

@@ -11,9 +11,13 @@ namespace GestorLigasFutbol.Models
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "La fecha de Inicio es requerida")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:DD-MM-YYYY}")]
         public DateTime FechaInicio {  get; set; }
 
         [Required(ErrorMessage = "La fecha de Cierre es requerida")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:DD-MM-YYYY}")]
         public DateTime FechaCierre { get; set; }
 
         [Required(ErrorMessage = "El numero de Equipos Participantes es requerido")]
