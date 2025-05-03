@@ -37,7 +37,7 @@ namespace GestorLigasFutbol.Controllers
             if (usu != null)
             {
                 //Inicio de sesion Singleton
-                _sesionService.UsuActual = usu;
+                //_sesionService.UsuActual = usu;
                 return RedirectToAction("Gestion", "Home");
             }
            
