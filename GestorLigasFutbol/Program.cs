@@ -1,9 +1,67 @@
+using GestorLigasFutbol.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication;
+using static GestorLigasFutbol.Services.Sesion;
+
 var builder = WebApplication.CreateBuilder(args);
 
+//sesion de autenticacion
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+{
+    //propiedades
+    option.LoginPath = "/UsuariosLogin/Login"; //ruta donde esta el metodo de login dentro del controller
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<DbContextUsuarios>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextTipoUsuarios>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextSanciones>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextTipoSanciones>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextResultados>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextLigas>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextJugadores>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextEventos>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextEquipos>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextEntrenadores>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextCampeonatos>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextResultadosIndividuales>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+builder.Services.AddDbContext<DbContextLogin>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+//Registro de singleton
+builder.Services.AddSingleton<ISesionService, SesionService>();
+
+//agregar controlador y vistas
+builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -17,6 +75,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//Agregar autenticacion 
+app.UseAuthentication();
 
 app.UseAuthorization();
 

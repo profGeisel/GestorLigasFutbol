@@ -1,0 +1,50 @@
+﻿@model List<Sanciones>
+@{
+	ViewData["Title"] = "Sanciones";
+}
+
+<div class="container-fluid">
+	<h2>Registros de Sanciones Deportivas</h2>
+	<a type="button" asp-controller="Sanciones" asp-action="Insertar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+</div>
+@if (Model.Count==0)
+{
+	<p>No hay usuarios registrados</p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				
+				<th>Activa</th>
+				<th>IdJugador</th>
+				<th>IdEquipo</th>
+				<th>IdCampeonato</th>
+				<th>IdTipoS</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+		{
+		//generando las filas por cada registro
+			<tr>
+					<td>@Html.DisplayFor(modelsItem => item.EsActiva)</td>
+					<td>@Html.DisplayFor(modelsItem => item.IdJugador)</td>
+					<td>@Html.DisplayFor(modelsItem => item.IdEquipo)</td>
+					<td>@Html.DisplayFor(modelsItem => item.IdCampeonato)</td>
+					<td>@Html.DisplayFor(modelsItem => item.IdTipoS)</td>
+				<td>
+					<a asp-action="Actualizar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+					<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
+					<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
+				</td>
+
+			</tr>
+					
+				
+		}
+		</tbody>
+	</table>
+}

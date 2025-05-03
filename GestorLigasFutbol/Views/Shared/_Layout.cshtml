@@ -32,23 +32,24 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Calendarios</a>
                             <ul class="dropdown-menu bg-dark dropdown-menu-dark">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Ligas</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Equipos</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Ligas</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Equipos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Estadísticas</a>
                             <ul class="dropdown-menu bg-dark dropdown-menu-dark">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Ligas</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Equipos</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Jugadores</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Ligas</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Equipos</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Jugadores</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="Index">Acceso</a>
                             <ul class="dropdown-menu bg-dark dropdown-menu-dark">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Registrarse</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Ingresar</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Insertar">Registrarse</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="UsuariosLogin" asp-action="Login">Ingresar</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Salir">Cerrar Sesion</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -63,7 +64,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted fixed-bottom">
         <div class="container">
             &copy; 2025 - Web_LigasFutbol - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

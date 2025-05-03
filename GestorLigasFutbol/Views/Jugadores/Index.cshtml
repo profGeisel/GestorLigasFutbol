@@ -1,0 +1,55 @@
+﻿@model List<Jugadores>
+@{
+	ViewData["Title"] = "Jugadores";
+}
+
+<div class="container-fluid">
+	<h2>Registros de Jugadores</h2>
+	<a type="button" asp-controller="Jugadores" asp-action="Insertar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+</div>
+@if (Model.Count==0)
+{
+	<p>No hay Jugadores registrados</p>
+}
+else
+{
+<table class="table">
+	<thead>
+		<tr>
+		
+			<th>Nombre</th>
+			<th>Apellido P</th>
+			<th>Apellido M</th>
+			<th># Camisa</th>
+			<th>Fecha_Nacimiento</th>
+			<th>Edad</th>
+			<th>Cedula</th>
+			<th>IdEquipo</th>
+		</tr>
+	</thead>
+	<tbody>
+			@foreach (var item in Model)
+			{
+					//generando las filas por cada registro
+				<tr>
+					<td>@Html.DisplayFor(modelsItem=> item.Nombre)</td>
+					<td>@Html.DisplayFor(modelsItem => item.ApellidoP)</td>
+					<td>@Html.DisplayFor(modelsItem => item.ApellidoM)</td>
+					<td>@Html.DisplayFor(modelsItem => item.NumeroCamisa)</td>
+					<td>@Html.DisplayFor(modelsItem => item.Fecha_Nacimiento)</td>
+					<td>@Html.DisplayFor(modelsItem => item.Edad)</td>
+					<td>@Html.DisplayFor(modelsItem => item.Cedula)</td>
+					<td>@Html.DisplayFor(modelsItem => item.IdEquipo)</td>
+					<td>
+						<a asp-action="Actualizar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+						<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
+						<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
+					</td>
+
+					</tr>
+				}
+			
+	</tbody>
+</table>
+
+}

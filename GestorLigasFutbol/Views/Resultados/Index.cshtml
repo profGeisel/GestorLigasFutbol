@@ -1,0 +1,52 @@
+﻿@model List<Resultados>
+@{
+	ViewData["Title"] = "Resultados Generales";
+}
+
+<div class="container-fluid">
+	<h2>Registros de Resultados Generales</h2>
+	<a type="button" asp-controller="Resultados" asp-action="Insertar" class="btn btn btn-outline-primary "> Agregar nuevo registro</a>
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			
+			<th>Equipo</th>
+			<th>Evento</th>
+			<th>Triunfos</th>
+			<th>Empates</th>
+			<th>Derrotas</th>
+			<th>Juegos</th>
+			<th>Goles_Favor</th>
+			<th>Goles_Contra</th>
+			<th>Diferencia_Goles</th>
+		</tr>
+	</thead>
+	<tbody>
+		@*programando recorrido de la lista *@
+		@{foreach (var item in Model)
+				{
+				//generando las filas por cada registro
+				<tr>
+				
+					<td>@Html.DisplayFor(modelsItem => item.IdEquipo)</td>
+					<td>@Html.DisplayFor(modelsItem => item.IdEvento)</td>
+					<td>@Html.DisplayFor(modelsItem => item.Triunfos)</td>
+					<td>@Html.DisplayFor(modelsItem => item.Empates)</td>
+					<td>@Html.DisplayFor(modelsItem => item.Derrotas)</td>
+					<td>@Html.DisplayFor(modelsItem => item.Juegos)</td>
+					<td>@Html.DisplayFor(modelsItem => item.GolesFavor)</td>
+					<td>@Html.DisplayFor(modelsItem => item.GolesContra)</td>
+					<td>@Html.DisplayFor(modelsItem => item.DiferenciaGoles)</td>
+					<td>
+						<a asp-action="Actualizar" class="btn btn-outline-warning btn-sm" asp-route-id="@item.Id">Editar</a>
+						<a asp-action="Ver" class="btn btn-outline-primary btn-sm" asp-route-id="@item.Id">Ver</a>
+						<a asp-action="Eliminar" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Eliminar</a>
+					</td>
+
+				</tr>
+				}
+			
+		}
+	</tbody>
+</table>

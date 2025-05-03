@@ -1,0 +1,22 @@
+﻿@model List<Eventos>
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+</head>
+<body>
+    <div id='calendar'></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: '@Url.Action("GetEvents", "Events")'
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+</html>
