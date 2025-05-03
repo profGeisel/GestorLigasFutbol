@@ -1,23 +1,28 @@
 ﻿@model Usuario
 <div class="container align-content-center mx-6" style="width:50%; margin-top:50px; margin-bottom:50px;">
 	<br />
-<form action="Login" method="post" asp_controller="UsuariosLogin"> 
-	<h1 class= "h3 mb-3">Inicio de Sesion</h1>
-	<div class="form-floating">
-		<input type="text" class="form-control" required asp-for ="CorreoE"/>
-		<label for="floatingInput">Correo del Usuario</label>
-	</div>
+	<form action="Login" method="post" asp_controller="UsuariosLogin"> 
+		<h1 class= "h3 mb-3">Inicio de Sesion</h1>
+		<div class="form-floating">
+			<input type="text" class="form-control" required asp-for ="CorreoE"/>
+			<label for="floatingInput">Correo del Usuario</label>
+		</div>
 
-	<div class="form-floating">
-		<input type="Password" class="form-control" required asp-for="Contrasena" />
-		<label for="floatingPassword">Contrasena</label>
-	</div>
+		<div class="form-floating">
+			<input type="Password" class="form-control" required asp-for="Contrasena" />
+			<label for="floatingPassword">Contrasena</label>
+		</div>
 
-	<div class="checkbox mb-3">
-		<label><input type="checkbox"  asp-for="MantenerActivo" />Mantener sesion Iniciada</label>
-	</div>
+		<div class="checkbox mb-3">
+			<label><input type="checkbox"  asp-for="MantenerActivo" />Mantener sesion Iniciada</label>
+		</div>
 
-	<button type="submit" class="btn btn-outline-primary">Ingresar</button>
-	<laber class="alert-danger">@ViewBag.Error</laber>
-</form>
+		<button type="submit" class="btn btn-outline-primary">Ingresar</button>
+		<laber class="alert-danger">@ViewBag.Error</laber>
+	</form>
+
+	@if (ViewBag.Error != null)
+	{
+		<p style="color:orangered;">@ViewBag.Error</p>
+	}
 </div>

@@ -2,10 +2,9 @@ using GestorLigasFutbol.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
+using static GestorLigasFutbol.Services.Sesion;
 
 var builder = WebApplication.CreateBuilder(args);
-//para login 
-builder.Services.AddSingleton(new ContextLogin(builder.Configuration.GetConnectionString("BdConexion")));
 
 //sesion de autenticacion
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
@@ -51,7 +50,18 @@ builder.Services.AddDbContext<DbContextCampeonatos>(option =>
 builder.Services.AddDbContext<DbContextResultadosIndividuales>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
+builder.Services.AddDbContext<DbContextLogin>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
+//Registro de singleton
+builder.Services.AddSingleton<ISesionService, SesionService>();
+
+//agregar controlador y vistas
+builder.Services.AddControllersWithViews();
+
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
