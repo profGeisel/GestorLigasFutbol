@@ -48,6 +48,9 @@ builder.Services.AddDbContext<DbContextEntrenadores>(option =>
 builder.Services.AddDbContext<DbContextCampeonatos>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
 
+builder.Services.AddDbContext<DbContextResultadosIndividuales>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("BdConexion")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

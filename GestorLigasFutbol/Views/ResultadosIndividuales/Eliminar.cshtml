@@ -2,50 +2,49 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-@model TipoSanciones //referenccia al modelo usuario
+@model ResultadosIndividuales //referenccia al modelo resultadosIndividuales
 @{
-	ViewData["Title"] = "Eliminar Tipo Sancion"; //titulo de la pagina
+	ViewData["Title"] = "Eliminando Resultados Individuales"; //titulo de la pagina
 }
 
 <div class="container">
 	<div id="registroUs" style="margin-top:50px; margin-bottom:50px;" class=" mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<div class="panel panel-info">
-			<h2 class="text-center">Eliminando Tipo Sancion</h2>
+			<h2 class="text-center">Eliminando Resultados individuales</h2>
 			<div style="padding-top:30px" class="panel-body">
 				<form asp-action="Eliminar" method="post" class="form-floating">
 					<div class="form-group">
 						<label asp-for="Id"></label>
-						<input class="form-control" asp-for="Id" readonly/>
+						<input class="form-control" asp-for="Id" readonly />
 					</div>
 					<div class="form-group">
-						<label asp-for="Nombre"></label>
-						<input class="form-control" asp-for="Nombre" readonly />
-						<span asp-validation-for="Nombre"  class="text-danger"></span>
+						<label asp-for="IdJugador"></label>
+						<input class="form-control" asp-for="IdJugador" readonly />
 					</div>
 					<div class="form-group">
-						<label asp-for="Descripcion"></label>
-						<input class="form-control" asp-for="Descripcion" readonly />
-						<span asp-validation-for="Descripcion" class="text-danger"></span>
+						<label asp-for="Fecha">Numero de Goles</label>
+						<input class="form-control" asp-for=Fecha />
+						<span asp-validation-for="Fecha" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="Tiempo"></label>
-						<input class="form-control" asp-for="Tiempo" readonly />
-						<span asp-validation-for="Tiempo" class="text-danger"></span>
+						<label asp-for="cantidadGoles">Numero de Goles</label>
+						<input class="form-control" asp-for=cantidadGoles />
+						<span asp-validation-for="cantidadGoles" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="Valor"></label>
-						<input class="form-control" asp-for="Valor" readonly />
-						<span asp-validation-for="Valor" class="text-danger"></span>
+						<label asp-for="asistencias">Asistencias</label>
+						<input class="form-control" asp-for=asistencias />
+						<span asp-validation-for="asistencias" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="Estado"></label>
-						<input class="form-control" asp-for="Estado" readonly />
-						<span asp-validation-for="Estado" class="text-danger"></span>
+						<label asp-for="tRojas">Tarjetas Rojas</label>
+						<input class="form-control" asp-for=tRojas />
+						<span asp-validation-for="tRojas" class="text-danger"></span>
 					</div>
 					<div class="form-group">
-						<label asp-for="IdLiga"></label>
-						<input class="form-control" asp-for="IdLiga" readonly />
-						<span asp-validation-for="IdLiga" class="text-danger"></span>
+						<label asp-for="tAmarillas">Tarjetas Amarillas</label>
+						<input class="form-control" asp-for=tAmarillas />
+						<span asp-validation-for="tAmarillas" class="text-danger"></span>
 					</div>
 					<br />
 					<div class="text-center col-sm-12 controls panel-body">

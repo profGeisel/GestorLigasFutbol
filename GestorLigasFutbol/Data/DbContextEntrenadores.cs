@@ -41,7 +41,7 @@ namespace GestorLigasFutbol.Data
         //metodo para retornar un usuario segun un id
         public Entrenadores ObtenerEntrenadorId(int id)
         {
-            var entrenador = Entrenadores.FromSqlInterpolated($"exec spGetEntrenadores {id}").AsEnumerable().FirstOrDefault();
+            var entrenador = Entrenadores.FromSqlInterpolated($"exec spGetEntrenador {id}").AsEnumerable().FirstOrDefault();
             return entrenador;
         }
 
