@@ -94,5 +94,8 @@ namespace GestorLigasFutbol.Controllers
 
                 return View();
             }
-        }
+
+        
+
+    }
     }

@@ -108,7 +108,11 @@ namespace GestorLigasFutbol.Controllers
 
             return View();
         }
+        public IActionResult CalendarioLigas()
+        {
 
-      
+            return View();
+        }
+
     }
 }
